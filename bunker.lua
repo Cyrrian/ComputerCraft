@@ -100,10 +100,10 @@ function Square(x)
 		end
 	end
 	
+	turtle.turnLeft()
+	
 	for i = 1, x-1 do
-		
-		turtle.turnLeft()
-
+				
 		turtle.forward()
 		Block_Down()
 
