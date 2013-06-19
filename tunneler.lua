@@ -132,13 +132,9 @@ function DoFuel()
 end
  
 function DoLight()     
-                        DoDig_Forward()
-                        turtle.forward()
-                        turtle.select(BLOCK_SLOT)
-                        turtle.place()
-                        turtle.back()
+                        DoDig_Up()
                         turtle.select(LIGHT_SLOT)
-                        turtle.place()
+                        turtle.placeUp()
 end
  
 function IsInvFull()
