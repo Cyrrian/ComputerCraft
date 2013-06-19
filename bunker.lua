@@ -15,9 +15,7 @@ BUTTON_SLOT= 6
 
 function Blocks()
 	
-	turtle.select(BLOCK_SLOT)
-	
-	if turtle.getItemCount() == 1 then
+	if turtle.getItemCount(BLOCK_SLOT) == 1 then
 		for i = 7, 16 do
 			turtle.select(i)
 			if BLOCK_SLOT ~= i and turtle.compareTo(BLOCK_SLOT) == true then
