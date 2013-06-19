@@ -3,8 +3,8 @@
 ---------------------------------------
  
 FUEL_SLOT = 1
-TORCH_SLOT = 2
-COBBLE_SLOT = 3
+LIGHT_SLOT = 2
+BLOCK_SLOT = 3
 CHEST_SLOT = 4
  
 ---------------------------------------
@@ -24,8 +24,8 @@ intStepCount = 1
 --Functions
 ---------------------------------------
  
-function CheckTorches()
-        if turtle.getItemCount(TORCH_SLOT) == 0 then
+function CheckLights()
+        if turtle.getItemCount(LIGHT_SLOT) == 0 then
         os.reboot()
         end
 end
@@ -42,10 +42,10 @@ function Compress_Inv()
                 turtle.select(i)
                 if FUEL_SLOT ~= i and turtle.compareTo(FUEL_SLOT) == true then
                         turtle.transferTo(FUEL_SLOT)
-                elseif TORCH_SLOT ~= i and turtle.compareTo(TORCH_SLOT) == true then
-                        turtle.transferTo(TORCH_SLOT)
-                elseif COBBLE_SLOT ~= i and turtle.compareTo(COBBLE_SLOT) == true then
-                        turtle.transferTo(COBBLE_SLOT)
+                elseif LIGHT_SLOT ~= i and turtle.compareTo(LIGHT_SLOT) == true then
+                        turtle.transferTo(LIGHT_SLOT)
+                elseif BLOCK_SLOT ~= i and turtle.compareTo(BLOCK_SLOT) == true then
+                        turtle.transferTo(BLOCK_SLOT)
                 elseif CHEST_SLOT ~= i and turtle.compareTo(CHEST_SLOT) == true then
                         turtle.transferTo(CHEST_SLOT)
                 end
@@ -59,38 +59,38 @@ function DoChest()
        
         for i = 1, 16 do
                 turtle.select(i)
-                if turtle.compareTo(FUEL_SLOT) ~= true and turtle.compareTo(TORCH_SLOT) ~= true and turtle.compareTo(CHEST_SLOT) ~= true and i ~= COBBLE_SLOT then
+                if turtle.compareTo(FUEL_SLOT) ~= true and turtle.compareTo(LIGHT_SLOT) ~= true and turtle.compareTo(CHEST_SLOT) ~= true and i ~= BLOCK_SLOT then
                         turtle.drop()
                 end
         end
 end
  
---Check if space below is cobble and if not replace
-function DoCobble_Down()
-        turtle.select(COBBLE_SLOT)
+--Check if space below is Block and if not replace
+function DoBlock_Down()
+        turtle.select(BLOCK_SLOT)
         if turtle.compareDown() ~= true then
                 DoDig_Down()
-                turtle.select(COBBLE_SLOT)
+                turtle.select(BLOCK_SLOT)
                 turtle.placeDown()
         end
 end
  
---Check if space forward is cobble and if not replace
-function DoCobble_Forward()
-        turtle.select(COBBLE_SLOT)
+--Check if space forward is Block and if not replace
+function DoBlock_Forward()
+        turtle.select(BLOCK_SLOT)
         if turtle.compare() ~= true then
                 DoDig_Forward()
-                turtle.select(COBBLE_SLOT)
+                turtle.select(BLOCK_SLOT)
                 turtle.place()
         end
 end
  
---Check if space above is cobble and if not replace
-function DoCobble_Up()
-        turtle.select(COBBLE_SLOT)
+--Check if space above is Block and if not replace
+function DoBlock_Up()
+        turtle.select(BLOCK_SLOT)
         if turtle.compareUp() ~= true then
                 DoDig_Up()
-                turtle.select(COBBLE_SLOT)
+                turtle.select(BLOCK_SLOT)
                 turtle.placeUp()
         end
 end
@@ -131,13 +131,13 @@ function DoFuel()
         end
 end
  
-function DoTorch()     
+function DoLight()     
                         DoDig_Forward()
                         turtle.forward()
-                        turtle.select(COBBLE_SLOT)
+                        turtle.select(BLOCK_SLOT)
                         turtle.place()
                         turtle.back()
-                        turtle.select(TORCH_SLOT)
+                        turtle.select(LIGHT_SLOT)
                         turtle.place()
 end
  
@@ -161,93 +161,54 @@ end
 --Main
 ---------------------------------------
 while intStepCount <= intLength do
-        CheckTorches()
+        CheckLights()
         DoFuel()
        
-        --Dig forward until clear
         DoDig_Forward()
-        --Move forward
         turtle.forward()
-        --Check down for cobble, dig and replace if not
-        DoCobble_Down()
-        --Dig up until clear
+        DoBlock_Down()
         DoDig_Up()
-        --Turn left
         turtle.turnLeft()
-        --Dig forward until clear
         DoDig_Forward()
-        --Move forward
         turtle.forward()
-        --Check down for cobble, dig and replace if not
-        DoCobble_Down()
-        --Check forward for cobble, dig and replace if not
-        DoCobble_Forward()
-        --Dig up until clear
+        DoBlock_Down()
+        DoBlock_Forward()
         DoDig_Up()
-        --Move up
         turtle.up()
-        --Place left torch if needed
-        if intStepCount % 10 == 5 then
-                DoTorch()
-        else
-        --Else check forward for cobble, dig and replace if not
-                DoCobble_Forward()
-        end
-        --Dig up until clear
+	DoBlock_Forward()
         DoDig_Up()
-        --Move up
         turtle.up()
-        --Check forward for cobble, dig and replace if not
-        DoCobble_Forward()
-        --Check up for cobble, dig and replace if not
-        DoCobble_Up()
-        --Turn right
+        DoBlock_Forward()
+        DoBlock_Up()
         turtle.turnRight()
-        --Turn right
         turtle.turnRight()
-        --Dig forward until clear
         DoDig_Forward()
-        --Move forward
         turtle.forward()
-        --Check up for cobble, dig and replace if not
-        DoCobble_Up()
-        --Dig forward until clear
-        DoDig_Forward()
-        --Move forward
-        turtle.forward()
-        --Check up for cobble, dig and replace if not
-        DoCobble_Up()
-        --Check forward for cobble, dig and replace if not
-        DoCobble_Forward()
-        --Dig down
-        DoDig_Down()
-        --Move down
-        turtle.down()
-        --Place right torch if needed
-        if intStepCount % 10 == 0 then
-                DoTorch()
+	
+	if intStepCount % 7 == 0 then
+                DoLight()
         else
-        --Else check forward for cobble, dig and replace if not
-                DoCobble_Forward()
-        end
-        --Dig down
+		DoBlock_Up()
+	end
+	
+        DoDig_Forward()
+        turtle.forward()
+        DoBlock_Up()
+        DoBlock_Forward()
         DoDig_Down()
-        --Move down
         turtle.down()
-        --Check forward for cobble, dig and replace if not
-        DoCobble_Forward()
-        --Check down for cobble, dig and replace if not
-        DoCobble_Down()
-        --Move back
+	DoBlock_Forward()
+        DoDig_Down()
+        turtle.down()
+        DoBlock_Forward()
+        DoBlock_Down()
         turtle.back()
-        --Check for only one empty space
+	
         Compress_Inv()
         if IsInvFull() == true then
-        --Drop chest and dump extra junk if near full
                 DoChest()
         end
                
-        --Turn left
         turtle.turnLeft()
  
         intStepCount =  intStepCount + 1
