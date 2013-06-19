@@ -13,9 +13,9 @@ CHEST_SLOT = 4
  
 args = { ... }
 intLength = tonumber(args[1])
-intLength = intLength or 5
-if intLength % 5 ~= 0 then
-	intLength = intLength - (intLength % 5) + 5
+intLength = intLength or 7
+if intLength % 7 ~= 0 then
+	intLength = intLength - (intLength % 7)
 end
  
 intStepCount = 1
@@ -38,7 +38,7 @@ end
  
 --Compress important inventory items
 function Compress_Inv()
-        for i = 1, 16 do
+        for i = 5, 16 do
                 turtle.select(i)
                 if FUEL_SLOT ~= i and turtle.compareTo(FUEL_SLOT) == true then
                         turtle.transferTo(FUEL_SLOT)
@@ -142,19 +142,14 @@ function DoLight()
 end
  
 function IsInvFull()
-        intEmptySlots = 16
        
-        for i = 1, 16 do
-                if turtle.getItemCount(i) > 0 then
-                        intEmptySlots = intEmptySlots - 1
+        for i = 16, 5 do
+                if turtle.getItemCount(i) == 0 then
+                        return false
                 end
         end
-       
-        if intEmptySlots <= 1 then
-                return true
-        end
-       
-        return false
+
+	return true
        
 end
 ---------------------------------------
