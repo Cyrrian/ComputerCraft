@@ -139,7 +139,7 @@ end
  
 function IsInvFull()
        
-        for i = 16, 5 do
+        for i = 16, 5, -1 do
                 if turtle.getItemCount(i) == 0 then
                         return false
                 end
