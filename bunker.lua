@@ -12,9 +12,24 @@ BUTTON_SLOT= 6
 ---------------------------------------
 --Functions
 ---------------------------------------
-  
+
+function Blocks()
+	
+	turtle.select(BLOCK_SLOT)
+	
+	if turtle.getItemCount() == 1 then
+		for i = 7, 16 do
+			turtle.select(i)
+			if BLOCK_SLOT ~= i and turtle.compareTo(BLOCK_SLOT) == true then
+				turtle.transferTo(BLOCK_SLOT)
+			end
+		end
+	end
+end
+
 --Check if space below is Block and if not replace
 function Block_Down()
+	Blocks()
         turtle.select(BLOCK_SLOT)
         if turtle.compareDown() ~= true then
                 Dig_Down()
@@ -25,6 +40,7 @@ end
  
 --Check if space forward is Block and if not replace
 function Block_Forward()
+	Blocks()
         turtle.select(BLOCK_SLOT)
         if turtle.compare() ~= true then
                 Dig_Forward()
@@ -35,6 +51,7 @@ end
  
 --Check if space above is Block and if not replace
 function Block_Up()
+	Blocks()
         turtle.select(BLOCK_SLOT)
         if turtle.compareUp() ~= true then
                 Dig_Up()
@@ -78,7 +95,20 @@ function Fuel()
                 end
         end
 end
- 
+
+function Move_Back()
+
+	if turtle.back() ~= true then
+		turtle.turnLeft()
+		turtle.turnLeft()
+		Dig_Forward()
+		turtle.turnLeft()
+		turtle.turnLeft()
+		Move_Back()
+	end
+	
+end
+
 function Move_Forward()
 
 	if turtle.detect() then
@@ -87,8 +117,17 @@ function Move_Forward()
 	
 	turtle.forward()
 end
+
+function Move_Up()
+
+	if turtle.detectUp() then
+		Dig_Up()
+	end
+	
+	turtle.up()
+end
  
-function Square(x)
+function Plane(x)
 
 	Block_Down()
 	
@@ -119,9 +158,64 @@ function Square(x)
 	end
 
 end
+
+function Walls(x)
+	
+	Move_Up()
+	
+	for i=1, x-1 do
+	
+		Block_Up()
+		Block_Down()
+		Move_Back()
+		Block_Forward()
+		
+	end
+	
+	turtle.turnRight()
+	
+	for i=1, x-1 do
+	
+		Block_Up()
+		Block_Down()
+		Move_Back()
+		Block_Forward()
+		
+	end
+	
+	turtle.turnRight()
+	
+	for i=1, x-1 do
+	
+		Block_Up()
+		Block_Down()
+		Move_Back()
+		Block_Forward()
+		
+	end
+	
+	turtle.turnRight()
+	
+	for i=1, x-2 do
+	
+		Block_Up()
+		Block_Down()
+		Move_Back()
+		Block_Forward()
+		
+	end
+	
+	Block_Down()
+	Move_Up()
+	Block_Down()
+	Move_Up()
+	Block_Down()
+	
+end
 ---------------------------------------
 --Main
 ---------------------------------------
 Fuel()
 
-Square(7)
+Plane(7)
+Walls(7)
