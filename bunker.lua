@@ -79,6 +79,15 @@ function Fuel()
         end
 end
  
+function Move_Forward()
+
+	if turtle.detect() then
+		Dig_Forward()
+	end
+	
+	turtle.forward()
+end
+ 
 function Square(x)
 
 	Block_Down()
@@ -88,14 +97,14 @@ function Square(x)
 		turtle.turnLeft()
 		
 		for j=1, i do
-			turtle.forward()
+			Move_Forward()
 			Block_Down()
 		end
 		
 		turtle.turnLeft()
 		
 		for j=1, i do
-			turtle.forward()
+			Move_Forward()
 			Block_Down()
 		end
 	end
@@ -104,7 +113,7 @@ function Square(x)
 	
 	for i = 1, x-1 do
 				
-		turtle.forward()
+		Move_Forward()
 		Block_Down()
 
 	end
