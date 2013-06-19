@@ -17,7 +17,7 @@ BUTTON_SLOT= 6
 function Block_Down()
         turtle.select(BLOCK_SLOT)
         if turtle.compareDown() ~= true then
-                DoDig_Down()
+                Dig_Down()
                 turtle.select(BLOCK_SLOT)
                 turtle.placeDown()
         end
@@ -27,7 +27,7 @@ end
 function Block_Forward()
         turtle.select(BLOCK_SLOT)
         if turtle.compare() ~= true then
-                DoDig_Forward()
+                Dig_Forward()
                 turtle.select(BLOCK_SLOT)
                 turtle.place()
         end
@@ -37,7 +37,7 @@ end
 function Block_Up()
         turtle.select(BLOCK_SLOT)
         if turtle.compareUp() ~= true then
-                DoDig_Up()
+                Dig_Up()
                 turtle.select(BLOCK_SLOT)
                 turtle.placeUp()
         end
