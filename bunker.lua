@@ -9,6 +9,8 @@ WINDOW_SLOT = 4
 DOOR_SLOT = 5
 BUTTON_SLOT= 6
 
+BUNKER_SIZE = 7
+
 i = -1
 j = -1
 ---------------------------------------
@@ -140,17 +142,17 @@ size = 7
 -----------------------------
 Block_Down()
 	
-for i = 1, size-1, 1 do
+for i = 1, BUNKER_SIZE-1, 1 do
 	
 	turtle.turnLeft()
-	print("i: " .. i .. " j: " .. j .. " size: " .. size)
+	print("i: " .. i .. " j: " .. j .. " size: " .. BUNKER_SIZE)
 	for j=1, i do
 		Move_Forward()
 		Block_Down()
 	end
 	
 	turtle.turnLeft()
-	print("i: " .. i .. " j: " .. j .. " size: " .. size)
+	print("i: " .. i .. " j: " .. j .. " size: " .. BUNKER_SIZE)
 	for j=1, i do
 		Move_Forward()
 		Block_Down()
@@ -158,8 +160,8 @@ for i = 1, size-1, 1 do
 end
 
 turtle.turnLeft()
-print("i: " .. i .. " j: " .. j .. " size: " .. size)
-for i = 1, size-1 do
+print("i: " .. i .. " j: " .. j .. " size: " .. BUNKER_SIZE)
+for i = 1, BUNKER_SIZE-1 do
 			
 	Move_Forward()
 	Block_Down()
@@ -171,7 +173,7 @@ end
 -----------------------------
 Move_Up()
 	
-for i=1, x-1 do
+for i=1, BUNKER_SIZE-1 do
 
 	Block_Up()
 	Block_Down()
@@ -182,7 +184,7 @@ end
 
 turtle.turnRight()
 
-for i=1, x-1 do
+for i=1, BUNKER_SIZE-1 do
 
 	Block_Up()
 	Block_Down()
@@ -193,7 +195,7 @@ end
 
 turtle.turnRight()
 
-for i=1, x-1 do
+for i=1, BUNKER_SIZE-1 do
 
 	Block_Up()
 	Block_Down()
@@ -204,7 +206,7 @@ end
 
 turtle.turnRight()
 
-for i=1, x-2 do
+for i=1, BUNKER_SIZE-2 do
 
 	Block_Up()
 	Block_Down()
