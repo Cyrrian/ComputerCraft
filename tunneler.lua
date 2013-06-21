@@ -203,4 +203,6 @@ while intStepCount <= intLength do
         turtle.turnLeft()
  
         intStepCount =  intStepCount + 1
+	
+	turtle.select(BLOCK_SLOT)
 end
