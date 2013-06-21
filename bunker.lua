@@ -105,6 +105,8 @@ end
 --Move Functions
 -----------------------------
 function Move_Back()
+	Fuel()
+	
 	if turtle.back() ~= true then
 		turtle.turnLeft()
 		turtle.turnLeft()
@@ -115,6 +117,8 @@ function Move_Back()
 end
 
 function Move_Forward()
+	Fuel()
+	
 	if turtle.detect() then
 		Dig_Forward()
 	end
@@ -123,6 +127,8 @@ function Move_Forward()
 end
 
 function Move_Up()
+	Fuel()
+	
 	if turtle.detectUp() then
 		Dig_Up()
 	end
@@ -133,26 +139,24 @@ end
 ---------------------------------------
 --Main
 ---------------------------------------
-Fuel()
-
-size = 7
 
 -----------------------------
 --Base
 -----------------------------
 Block_Down()
 	
-for i = 1, BUNKER_SIZE-1, 1 do
+for i = 1, BUNKER_SIZE-1 do
 	
 	turtle.turnLeft()
-	print("i: " .. i .. " j: " .. j .. " size: " .. BUNKER_SIZE)
+	
 	for j=1, i do
 		Move_Forward()
 		Block_Down()
+		print("i: " .. i .. " j: " .. j .. " size: " .. BUNKER_SIZE)
 	end
 	
 	turtle.turnLeft()
-	print("i: " .. i .. " j: " .. j .. " size: " .. BUNKER_SIZE)
+
 	for j=1, i do
 		Move_Forward()
 		Block_Down()
@@ -160,7 +164,7 @@ for i = 1, BUNKER_SIZE-1, 1 do
 end
 
 turtle.turnLeft()
-print("i: " .. i .. " j: " .. j .. " size: " .. BUNKER_SIZE)
+
 for i = 1, BUNKER_SIZE-1 do
 			
 	Move_Forward()
