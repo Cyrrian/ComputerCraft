@@ -99,10 +99,9 @@ function Move_Back()
 	if turtle.back() ~= true then
 		turtle.turnLeft()
 		turtle.turnLeft()
-		Dig_Forward()
+		Move_Forward()
 		turtle.turnLeft()
 		turtle.turnLeft()
-		Move_Back()
 	end
 	
 end
