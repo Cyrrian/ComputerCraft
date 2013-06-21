@@ -153,7 +153,7 @@ for i = 1, BUNKER_SIZE-1 do
 	for j=1, i do
 		Move_Forward()
 		Block_Down()
-		print("i: " .. i .. " j: " .. j .. " size: " .. BUNKER_SIZE)
+		print("j: " .. j)
 	end
 	
 	turtle.turnLeft()
@@ -161,15 +161,19 @@ for i = 1, BUNKER_SIZE-1 do
 	for j=1, i do
 		Move_Forward()
 		Block_Down()
+		print("j: " .. j)
 	end
+	
+	print("i: " .. i)
 end
 
 turtle.turnLeft()
 
-for i = 1, BUNKER_SIZE-1 do
+for j = 1, BUNKER_SIZE-1 do
 			
 	Move_Forward()
 	Block_Down()
+	print("j: " .. j)
 
 end
 
