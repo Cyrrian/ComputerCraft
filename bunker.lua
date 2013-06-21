@@ -141,14 +141,14 @@ Block_Down()
 for i = 1, size-1, 1 do
 	
 	turtle.turnLeft()
-	print("i: " .. i .. " j: " .. j .. " size: " size)
+	print("i: " .. i .. " j: " .. j .. " size: " .. size)
 	for j=1, i do
 		Move_Forward()
 		Block_Down()
 	end
 	
 	turtle.turnLeft()
-	print("i: " .. i .. " j: " .. j .. " size: " size)
+	print("i: " .. i .. " j: " .. j .. " size: " .. size)
 	for j=1, i do
 		Move_Forward()
 		Block_Down()
@@ -156,7 +156,7 @@ for i = 1, size-1, 1 do
 end
 
 turtle.turnLeft()
-print("i: " .. i .. " j: " .. j .. " size: " size)
+print("i: " .. i .. " j: " .. j .. " size: " .. size)
 for i = 1, size-1 do
 			
 	Move_Forward()
