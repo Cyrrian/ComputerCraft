@@ -18,8 +18,9 @@ function Blocks()
 	if turtle.getItemCount(BLOCK_SLOT) == 1 then
 		for i = 7, 16 do
 			turtle.select(i)
-			if BLOCK_SLOT ~= i and turtle.compareTo(BLOCK_SLOT) == true then
+			if turtle.compareTo(BLOCK_SLOT) == true then
 				turtle.transferTo(BLOCK_SLOT)
+				break
 			end
 		end
 	end
