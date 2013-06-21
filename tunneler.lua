@@ -40,13 +40,13 @@ end
 function Compress_Inv()
         for i = 5, 16 do
                 turtle.select(i)
-                if FUEL_SLOT ~= i and turtle.compareTo(FUEL_SLOT) == true then
+                if turtle.compareTo(FUEL_SLOT) == true then
                         turtle.transferTo(FUEL_SLOT)
-                elseif LIGHT_SLOT ~= i and turtle.compareTo(LIGHT_SLOT) == true then
+                elseif turtle.compareTo(LIGHT_SLOT) == true then
                         turtle.transferTo(LIGHT_SLOT)
-                elseif BLOCK_SLOT ~= i and turtle.compareTo(BLOCK_SLOT) == true then
+                elseif turtle.compareTo(BLOCK_SLOT) == true then
                         turtle.transferTo(BLOCK_SLOT)
-                elseif CHEST_SLOT ~= i and turtle.compareTo(CHEST_SLOT) == true then
+                elseif turtle.compareTo(CHEST_SLOT) == true then
                         turtle.transferTo(CHEST_SLOT)
                 end
         end
@@ -57,9 +57,9 @@ function DoChest()
         turtle.select(CHEST_SLOT)
         turtle.place()
        
-        for i = 1, 16 do
+        for i = 5, 16 do
                 turtle.select(i)
-                if turtle.compareTo(FUEL_SLOT) ~= true and turtle.compareTo(LIGHT_SLOT) ~= true and turtle.compareTo(CHEST_SLOT) ~= true and i ~= BLOCK_SLOT then
+                if turtle.compareTo(LIGHT_SLOT) ~= true and turtle.compareTo(CHEST_SLOT) ~= true then
                         turtle.drop()
                 end
         end
@@ -99,7 +99,7 @@ end
 function DoDig_Down()
         repeat
                 turtle.digDown()
-                sleep(0.5)
+                sleep(0.25)
         until turtle.detectDown() ~= true
 end
  
@@ -107,7 +107,7 @@ end
 function DoDig_Forward()
         repeat
                 turtle.dig()
-                sleep(0.5)
+                sleep(0.25)
         until turtle.detect() ~= true
 end
  
@@ -115,7 +115,7 @@ end
 function DoDig_Up()
         repeat
                 turtle.digUp()
-                sleep(0.5)
+                sleep(0.25)
         until turtle.detectUp() ~= true
 end
  
