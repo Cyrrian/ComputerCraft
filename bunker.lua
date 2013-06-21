@@ -34,6 +34,7 @@ function Blocks()
 end
 
 function Fuel()
+	print(turtle.getFuelLevel())
         if turtle.getFuelLevel() ~= 'unlimited' then
                 if turtle.getFuelLevel() < 10 then
                         turtle.select(FUEL_SLOT)
