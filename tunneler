@@ -286,7 +286,6 @@ mtxCommands[0][-1] = function()
 	Face_Left()
 	
 	if Low_Space() then
-		Compress_Inv()
 		Unload()
 	end
 	
