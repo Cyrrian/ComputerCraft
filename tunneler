@@ -67,12 +67,8 @@ function Unload()
 		for i = 1, intChestDistance do
 			Move_Forward()
 		end
-		Face_Right()
 	else
-		Face_Right()
-		if turtle.detect() then
-			Dig_Forward()
-		end
+		Face_Back()
 		turtle.select(CHEST_SLOT)
 		turtle.place()
 		intLastChest = pos.z
@@ -317,9 +313,10 @@ end
 --Middle Left
 mtxCommands[-1][0] = function()
 	Face_Left()
-	Block_Forward()
 	if pos.z % 5 == 0 then 
 		Light_Forward()
+	else
+		Block_Forward()
 	end
 	Move_Up()
 end
@@ -332,9 +329,10 @@ end
 --Middle Right
 mtxCommands[1][0] = function()
 	Face_Right()
-	Block_Forward()
 	if pos.z % 5 == 0 then 
 		Light_Forward()
+	else
+		Block_Forward()
 	end
 	Move_Down()
 end
