@@ -264,6 +264,10 @@ local function Top_Right()
 	Move_Down()
 end
 
+local function Command(f)
+	f()
+end
+
 ---------------------------------------
 --Initialization
 ---------------------------------------
@@ -303,6 +307,6 @@ mtxCommands[1][1] = "Top_Right"
 ---------------------------------------
 while pos.z <= intLength do
 
-	getfenv()[mtxCommands[pos.x][pos.y]]()
+	Command(mtxCommands[pos.x][pos.y])
 
 end
