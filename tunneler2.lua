@@ -30,7 +30,7 @@ function Check_Inv(item)
 	end
 end
 
- unction Fuel()
+ function Fuel()
 	local intFuel = turtle.getFuelLevel()
 	
         if intFuel ~= 'unlimited' and intFuel > 0 then
