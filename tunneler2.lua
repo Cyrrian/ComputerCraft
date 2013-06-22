@@ -52,4 +52,5 @@ intFacing = GetFacing(locStart)
 ---------------------------------------
 --Main
 ---------------------------------------
+turtle.refuel(1)
 print("x: " .. locStart.x .. " y: " .. locStart.y .. " z: " .. locStart.z .. " f: " .. intFacing)
