@@ -61,7 +61,7 @@ end
 
 function Unload()
 
-	local intChestDistance = pos.z - intLastChest
+	local intChestDistance = pos.z - intLastChest or MAX_CHEST_DIST + 1
 	if intChestDistance <= MAX_CHEST_DIST then
 		Face_Back()
 		for local i = 1, intChestDistance do
