@@ -80,7 +80,7 @@ end
 function Light_Forward()
 	Check_Inv(LIGHT_SLOT)
 	
-	Move_forward()
+	Move_Forward()
 	Block_Forward()
 	turtle.back()
 	turtle.select(LIGHT_SLOT)
