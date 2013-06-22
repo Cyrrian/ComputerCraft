@@ -287,10 +287,10 @@ mtxCommands[0][-1] = function()
 	if Low_Space() then
 		Unload()
 	end
-
-	Face_Left()
 	
-	if turtle.detect() == true or turtle.detectUp() == true then
+	turtle.select(BLOCK_SLOT)
+	if turtle.detect() == true or turtle.detectUp() == true or not turtle.compareDown() then
+		Face_Left()
 		Block_Down()
 		Dig_Up()
 		Move_Forward()
