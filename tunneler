@@ -7,6 +7,7 @@ LIGHT_SLOT = 2
 BLOCK_SLOT = 3
 CHEST_SLOT = 4
 FIRST_OPEN_SLOT = 5
+MAX_CHEST_DIST = 10
 
 ---------------------------------------
 --Functions
@@ -51,8 +52,44 @@ end
 
 
 function Low_Space()
+	if turtle.getItemCount(15) > 0 then
+		return true
+	end
 	
+	return false
 end
+
+function Unload()
+
+	local intChestDistance = pos.z - intLastChest
+	if intChestDistance <= MAX_CHEST_DIST then
+		Face_Back()
+		for local i = 1, intChestDist do
+			Move_Forward()
+		end
+		Face_Right()
+	else
+		Face_Right()
+		turtle.select(CHEST_SLOT)
+		turtle.place()
+		intLastChest = pos.z
+	end
+	
+	for i = FIRST_OPEN_SLOT, 16 do
+                turtle.select(i)
+                if turtle.compareTo(LIGHT_SLOT) ~= true and turtle.compareTo(CHEST_SLOT) ~= true then
+                        turtle.drop()
+                end
+        end
+	
+	if intChestDist > 0 then
+		FaceForward()
+		for local i = 1, intChestDist do
+			Move_Forward()
+		end
+	end
+end
+
 -----------------------------
 --Block Functions
 -----------------------------
@@ -248,6 +285,11 @@ end
 mtxCommands[0][-1] = function()
 	Face_Left()
 	
+	if Low_Space() then
+		Compress_Inv()
+		Unload()
+	end
+	
 	if turtle.detect() == true or turtle.detectUp() == true then
 		Block_Down()
 		Dig_Up()
@@ -329,6 +371,7 @@ if intLength % 5 ~= 0 then
 end
 
 intStep = 1
+intLastChest = -MAX_CHEST_DISTANCE
 
 boolComplete = false
 
