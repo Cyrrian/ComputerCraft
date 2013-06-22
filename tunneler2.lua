@@ -12,6 +12,14 @@ FIRST_OPEN_SLOT = 5
 --Functions
 ---------------------------------------
 
+function Tunnel_Complete()
+	if pos.x == 0  and pos.y == -1 and pos.z == intLength and dir.z == 1
+		return true
+	end
+	
+	return false
+end
+
 -----------------------------
 --Supply Functions
 -----------------------------
@@ -235,7 +243,7 @@ mtxCommands[0][-1] = function()
 		Block_Down()
 		Dig_Up()
 		Move_Forward()
-	else
+	elseif not Tunnel_Complete()
 		Face_Front()
 		Move_Forward()
 	end
@@ -319,10 +327,6 @@ dir = {x=0, z=1}
 ---------------------------------------
 --Main
 ---------------------------------------
-while pos.z <= intLength do
-print(pos.x)
-print(pos.y)
-print(pos.z)
+while not Tunnel_Complete() do
 	mtxCommands[pos.x][pos.y]()
-
 end
