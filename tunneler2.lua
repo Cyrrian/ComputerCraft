@@ -29,7 +29,7 @@ function GetFacing(locStart)
 	elseif locNew.z < locStart.z then
 		return 2
 	else
-		os.reboot()
+		--os.reboot()
 	end
 	
 end
