@@ -85,7 +85,7 @@ function Unload()
                 end
         end
 	
-	if intChestDist > 0 then
+	if intChestDistance > 0 then
 		FaceForward()
 		for i = 1, intChestDistance do
 			Move_Forward()
