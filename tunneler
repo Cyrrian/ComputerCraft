@@ -85,8 +85,10 @@ function Unload()
                 end
         end
 	
+	turtle.select(FIRST_OPEN_SLOT)
+	
 	if intChestDistance > 0 then
-		FaceForward()
+		Face_Forward()
 		for i = 1, intChestDistance do
 			Move_Forward()
 		end
