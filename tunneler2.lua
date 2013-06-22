@@ -2,11 +2,11 @@
 --Constants
 ---------------------------------------
  
-local FUEL_SLOT = 1
-local LIGHT_SLOT = 2
-local BLOCK_SLOT = 3
-local CHEST_SLOT = 4
-local FIRST_OPEN_SLOT = 5
+FUEL_SLOT = 1
+LIGHT_SLOT = 2
+BLOCK_SLOT = 3
+CHEST_SLOT = 4
+FIRST_OPEN_SLOT = 5
 
 ---------------------------------------
 --Functions
@@ -15,8 +15,7 @@ local FIRST_OPEN_SLOT = 5
 -----------------------------
 --Supply Functions
 -----------------------------
-local function Check_Inv(item)
-	
+function Check_Inv(item)
 	if turtle.getItemCount(item) == 1 then
 		for i = FIRST_OPEN_SLOT, 16 do
 			turtle.select(i)
@@ -31,7 +30,7 @@ local function Check_Inv(item)
 	end
 end
 
-local function Fuel()
+ unction Fuel()
 	local intFuel = turtle.getFuelLevel()
 	
         if intFuel ~= 'unlimited' and intFuel > 0 then
@@ -45,7 +44,7 @@ end
 -----------------------------
 --Block Functions
 -----------------------------
-local function Block_Down()
+function Block_Down()
 	Check_Inv(BLOCK_SLOT)
 	
         turtle.select(BLOCK_SLOT)
@@ -56,7 +55,7 @@ local function Block_Down()
         end
 end
 
-local function Block_Forward()
+function Block_Forward()
 	Check_Inv(BLOCK_SLOT)
 	
         turtle.select(BLOCK_SLOT)
@@ -67,7 +66,7 @@ local function Block_Forward()
         end
 end
  
-local function Block_Up()
+function Block_Up()
 	Check_Inv(BLOCK_SLOT)
 	
         turtle.select(BLOCK_SLOT)
@@ -78,7 +77,7 @@ local function Block_Up()
         end
 end
 
-local function Light_Forward()
+function Light_Forward()
 	Check_Inv(LIGHT_SLOT)
 	
 	turtle.select(LIGHT_SLOT)
@@ -89,7 +88,7 @@ end
 --Move Functions
 -----------------------------
 
-local function Move_Down()
+function Move_Down()
 	Fuel()
 	
 	while not turtle.down() do
@@ -101,7 +100,7 @@ local function Move_Down()
 	pos.y = pos.y - 1
 end
 
-local function Move_Forward()
+function Move_Forward()
 	Fuel()
 	
 	while not turtle.forward() do
@@ -114,7 +113,7 @@ local function Move_Forward()
 	pos.z = pos.z + dir.z
 end
 
-local function Move_Up()
+function Move_Up()
 	Fuel()
 	
 	while not turtle.up() do
@@ -130,35 +129,35 @@ end
 --Turn Functions
 -----------------------------
 
-local function Turn_Left()
+function Turn_Left()
 	turtle.turnLeft()
 	dir.x, dir.z = -dir.z, dir.x
 end
 
-local function Turn_Right()
+function Turn_Right()
 	turtle.turnRight()
 	dir.x, dir.z = dir.z, -dir.x
 end
 
-local function Face_Back()
+function Face_Back()
 	while dir.z ~= -1 do
 		Turn_Left()
 	end
 end
 
-local function Face_Front()
+function Face_Front()
 	while dir.z ~= 1 do
 		Turn_Right()
 	end
 end
 
-local function Face_Left()
+function Face_Left()
 	while dir.x ~= -1 do
 		Turn_Left()
 	end
 end
 
-local function Face_Right()
+function Face_Right()
 	while dir.x ~= 1 do
 		Turn_Right()
 	end
@@ -192,7 +191,7 @@ end
 --Command Matrix Functions
 -----------------------------
 
-local mtxCommands = {}
+mtxCommands = {}
 for i = -1, 1 do
 	mtxCommands[i] = {}
 	for j = -1, 1 do
@@ -279,14 +278,14 @@ end
 --Initialization
 ---------------------------------------
  
-local args = { ... }
-local intLength = tonumber(args[1])
-local intLength = intLength or 5
+args = { ... }
+intLength = tonumber(args[1])
+intLength = intLength or 5
 if intLength % 5 ~= 0 then
 	intLength = intLength - (intLength % 5)
 end
 
-local intStep = 1
+intStep = 1
 
 pos = {x=0, y=0, z=0}
 dir = {x=0, z=1}
