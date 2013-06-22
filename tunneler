@@ -40,6 +40,8 @@ function Check_Inv(item)
 end
 
  function Fuel()
+	Check_Inv(FUEL_SLOT)
+	
 	local intFuel = turtle.getFuelLevel()
 	
         if intFuel ~= 'unlimited' and intFuel == 0 then
