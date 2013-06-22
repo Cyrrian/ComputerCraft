@@ -79,7 +79,10 @@ end
 
 function Light_Forward()
 	Check_Inv(LIGHT_SLOT)
-	print("LIGHTS")
+	
+	Move_forward()
+	Block_Forward()
+	turtle.back()
 	turtle.select(LIGHT_SLOT)
 	turtle.place()
 end
