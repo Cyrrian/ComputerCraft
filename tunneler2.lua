@@ -307,6 +307,6 @@ mtxCommands[1][1] = "Top_Right"
 ---------------------------------------
 while pos.z <= intLength do
 
-	Command(mtxCommands[pos.x][pos.y])
+	getfenv()[mtxCommands[pos.x][pos.y]]()
 
 end
