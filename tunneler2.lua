@@ -13,7 +13,7 @@ FIRST_OPEN_SLOT = 5
 ---------------------------------------
 
 function Check_Complete()
-	if pos.z == intLength and dir.z = 1 then
+	if pos.z == intLength and dir.z == 1 then
 		return true
 	end
 	
