@@ -303,6 +303,6 @@ mtxCommands[1][1] = "Top_Right"
 ---------------------------------------
 while pos.z <= intLength do
 
-	mtxCommands[pos.x][pos.y]()
+	[mtxCommands[pos.x][pos.y]]()
 
 end
