@@ -131,7 +131,8 @@ end
 function Move_Forward()
 	Fuel()
 	
-	if boolComplete = Check_Complete() then
+	boolComplete = Check_Complete()
+	if boolComplete then
 		return
 	end
 	
