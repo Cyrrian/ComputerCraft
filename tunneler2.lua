@@ -201,6 +201,9 @@ for i = -1, 1 do
 end
 
 mtxCommands[-1][-1] = function()
+print(pos.x)
+print(pos.y)
+print(pos.z)
 	Block_Down()
 	Face_Left()
 	Block_Forward()
@@ -292,7 +295,9 @@ local dir = {x=0, z=1}
 --Main
 ---------------------------------------
 while pos.z <= intLength do
-
+print(pos.x)
+print(pos.y)
+print(pos.z)
 	mtxCommands[pos.x][pos.y]()
 
 end
