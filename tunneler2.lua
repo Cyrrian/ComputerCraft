@@ -2,11 +2,11 @@
 --Constants
 ---------------------------------------
  
-FUEL_SLOT = 1
-LIGHT_SLOT = 2
-BLOCK_SLOT = 3
-CHEST_SLOT = 4
-FIRST_OPEN_SLOT = 5
+local FUEL_SLOT = 1
+local LIGHT_SLOT = 2
+local BLOCK_SLOT = 3
+local CHEST_SLOT = 4
+local FIRST_OPEN_SLOT = 5
 
 ---------------------------------------
 --Functions
@@ -15,7 +15,7 @@ FIRST_OPEN_SLOT = 5
 -----------------------------
 --Supply Functions
 -----------------------------
-function Check_Inv(item)
+local function Check_Inv(item)
 	
 	if turtle.getItemCount(item) == 1 then
 		for i = FIRST_OPEN_SLOT, 16 do
@@ -31,7 +31,7 @@ function Check_Inv(item)
 	end
 end
 
-function Fuel()
+local function Fuel()
 	local intFuel = turtle.getFuelLevel()
 	
         if intFuel ~= 'unlimited' and intFuel > 0 then
@@ -45,7 +45,7 @@ end
 -----------------------------
 --Block Functions
 -----------------------------
-function Block_Down()
+local function Block_Down()
 	Check_Inv(BLOCK_SLOT)
 	
         turtle.select(BLOCK_SLOT)
@@ -56,7 +56,7 @@ function Block_Down()
         end
 end
 
-function Block_Forward()
+local function Block_Forward()
 	Check_Inv(BLOCK_SLOT)
 	
         turtle.select(BLOCK_SLOT)
@@ -67,7 +67,7 @@ function Block_Forward()
         end
 end
  
-function Block_Up()
+local function Block_Up()
 	Check_Inv(BLOCK_SLOT)
 	
         turtle.select(BLOCK_SLOT)
@@ -78,7 +78,7 @@ function Block_Up()
         end
 end
 
-function Light_Forward()
+local function Light_Forward()
 	Check_Inv(LIGHT_SLOT)
 	
 	turtle.select(LIGHT_SLOT)
@@ -89,7 +89,7 @@ end
 --Move Functions
 -----------------------------
 
-function Move_Down()
+local function Move_Down()
 	Fuel()
 	
 	while not turtle.down() do
@@ -101,7 +101,7 @@ function Move_Down()
 	pos.y = pos.y - 1
 end
 
-function Move_Forward()
+local function Move_Forward()
 	Fuel()
 	
 	while not turtle.forward() do
@@ -114,7 +114,7 @@ function Move_Forward()
 	pos.z = pos.z + dir.z
 end
 
-function Move_Up()
+local function Move_Up()
 	Fuel()
 	
 	while not turtle.up() do
@@ -130,35 +130,35 @@ end
 --Turn Functions
 -----------------------------
 
-function Turn_Left()
+local function Turn_Left()
 	turtle.turnLeft()
 	dir.x, dir.z = -dir.z, dir.x
 end
 
-function Turn_Right()
+local function Turn_Right()
 	turtle.turnRight()
 	dir.x, dir.z = dir.z, -dir.x
 end
 
-function Face_Back()
+local function Face_Back()
 	while dir.z ~= -1 do
 		Turn_Left()
 	end
 end
 
-function Face_Front()
+local function Face_Front()
 	while dir.z ~= 1 do
 		Turn_Right()
 	end
 end
 
-function Face_Left()
+local function Face_Left()
 	while dir.x ~= -1 do
 		Turn_Left()
 	end
 end
 
-function Face_Right()
+local function Face_Right()
 	while dir.x ~= 1 do
 		Turn_Right()
 	end
@@ -167,21 +167,21 @@ end
 -----------------------------
 --Dig Functions
 -----------------------------
-function Dig_Down()
+local function Dig_Down()
         while turtle.detectDown() == true do
                 turtle.digDown()
                 sleep(0.5)
 	end 
 end
  
-function Dig_Forward()
+local function Dig_Forward()
         while turtle.detect() == true do
                 turtle.dig()
                 sleep(0.5)
 	end        
 end
  
-function Dig_Up()
+local function Dig_Up()
         while turtle.detectUp() == true do
                 turtle.digUp()
                 sleep(0.5)
@@ -192,14 +192,14 @@ end
 --Command Matrix Functions
 -----------------------------
 
-function Bottom_Left()
+local function Bottom_Left()
 	Block_Down()
 	Face_Left()
 	Block_Forward()
 	Move_Up()
 end
 
-function Bottom_Center()
+local function Bottom_Center()
 	Face_Left()
 	
 	if turtle.detect() == true or turtle.detectUp() == true then
@@ -213,7 +213,7 @@ function Bottom_Center()
 	
 end
 
-function Bottom_Right()
+local function Bottom_Right()
 	Block_Down()
 	Face_Right()
 	Block_Forward()
@@ -221,7 +221,7 @@ function Bottom_Right()
 	Move_Forward()
 end
 
-function Middle_Left()
+local function Middle_Left()
 	Face_Left()
 	Block_Forward()
 	if pos.z % 5 == 0 then 
@@ -230,11 +230,11 @@ function Middle_Left()
 	Move_Up()
 end
 
-function Middle_Center()
+local function Middle_Center()
 	Move_Down()
 end
 
-function Middle_Right()
+local function Middle_Right()
 	Face_Right()
 	Block_Forward()
 	if pos.z % 5 == 0 then 
@@ -243,7 +243,7 @@ function Middle_Right()
 	Move_Down()
 end
 
-function Top_Left()
+local function Top_Left()
 	Block_Up()
 	Face_Left()
 	Block_Forward()
@@ -251,21 +251,17 @@ function Top_Left()
 	Move_Forward()
 end
 
-function Top_Center()
+local function Top_Center()
 	Block_Up()
 	Face_Right()
 	Move_Forward()
 end
 
-function Top_Right()
+local function Top_Right()
 	Block_Up()
 	Face_Right()
 	Block_Forward()
 	Move_Down()
-end
-
-function Command(f)
-	f()
 end
 
 ---------------------------------------
