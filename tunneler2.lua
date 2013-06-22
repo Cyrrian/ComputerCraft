@@ -11,7 +11,7 @@ CHEST_SLOT = 4
 --Functions
 ---------------------------------------
 
-function GetFacing()
+function GetFacing(locStart)
 	turtle.forward()
 	
 	locNew = vector.new(gps.locate())
@@ -43,7 +43,7 @@ end
 
 locStart = vector.new(gps.locate())
 
-intFacing = GetFacing()
+intFacing = GetFacing(locStart)
 
 ---------------------------------------
 --Main
