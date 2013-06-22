@@ -13,7 +13,7 @@ FIRST_OPEN_SLOT = 5
 ---------------------------------------
 
 function Tunnel_Complete()
-	if pos.x == 0  and pos.y == -1 and pos.z == intLength and dir.z == 1
+	if pos.x == 0  and pos.y == -1 and pos.z == intLength and dir.z == 1 then
 		return true
 	end
 	
@@ -243,7 +243,7 @@ mtxCommands[0][-1] = function()
 		Block_Down()
 		Dig_Up()
 		Move_Forward()
-	elseif not Tunnel_Complete()
+	elseif not Tunnel_Complete() then
 		Face_Front()
 		Move_Forward()
 	end
