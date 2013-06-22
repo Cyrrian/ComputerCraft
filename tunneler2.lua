@@ -167,21 +167,21 @@ end
 -----------------------------
 --Dig Functions
 -----------------------------
-local function Dig_Down()
+function Dig_Down()
         while turtle.detectDown() == true do
                 turtle.digDown()
                 sleep(0.5)
 	end 
 end
  
-local function Dig_Forward()
+function Dig_Forward()
         while turtle.detect() == true do
                 turtle.dig()
                 sleep(0.5)
 	end        
 end
  
-local function Dig_Up()
+function Dig_Up()
         while turtle.detectUp() == true do
                 turtle.digUp()
                 sleep(0.5)
