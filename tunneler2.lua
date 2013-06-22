@@ -12,8 +12,8 @@ FIRST_OPEN_SLOT = 5
 --Functions
 ---------------------------------------
 
-function Tunnel_Complete()
-	if pos.x == 0  and pos.y == -1 and pos.z == intLength and dir.z == 1 then
+function Check_Complete()
+	if pos.z == intLength and dir.z = 1 then
 		return true
 	end
 	
@@ -131,6 +131,10 @@ end
 function Move_Forward()
 	Fuel()
 	
+	if boolComplete = Check_Complete() then
+		return
+	end
+	
 	while not turtle.forward() do
 		if turtle.detect() then
 			Dig_Forward()
@@ -243,7 +247,7 @@ mtxCommands[0][-1] = function()
 		Block_Down()
 		Dig_Up()
 		Move_Forward()
-	elseif not Tunnel_Complete() then
+	elseif not boolComplete then
 		Face_Front()
 		Move_Forward()
 	end
@@ -321,12 +325,14 @@ end
 
 intStep = 1
 
+boolComplete = false
+
 pos = {x=0, y=0, z=0}
 dir = {x=0, z=1}
 
 ---------------------------------------
 --Main
 ---------------------------------------
-while not Tunnel_Complete() do
+while not boolComplete do
 	mtxCommands[pos.x][pos.y]()
 end
