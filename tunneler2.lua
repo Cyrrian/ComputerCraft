@@ -288,8 +288,8 @@ end
 
 local intStep = 1
 
-local pos = {x=0, y=0, z=0}
-local dir = {x=0, z=1}
+pos = {x=0, y=0, z=0}
+dir = {x=0, z=1}
 
 ---------------------------------------
 --Main
