@@ -33,7 +33,7 @@ end
  function Fuel()
 	local intFuel = turtle.getFuelLevel()
 	
-        if intFuel ~= 'unlimited' and intFuel > 0 then
+        if intFuel ~= 'unlimited' and intFuel == 0 then
 		turtle.select(FUEL_SLOT)
 		if turtle.refuel(1) ~= true then
 			os.reboot()
@@ -79,7 +79,7 @@ end
 
 function Light_Forward()
 	Check_Inv(LIGHT_SLOT)
-	
+	print("LIGHTS")
 	turtle.select(LIGHT_SLOT)
 	turtle.place()
 end
@@ -199,16 +199,15 @@ for i = -1, 1 do
 	end
 end
 
+--Bottom Left
 mtxCommands[-1][-1] = function()
-print(pos.x)
-print(pos.y)
-print(pos.z)
 	Block_Down()
 	Face_Left()
 	Block_Forward()
 	Move_Up()
 end
 
+--Bottom Center
 mtxCommands[0][-1] = function()
 	Face_Left()
 	
@@ -223,6 +222,7 @@ mtxCommands[0][-1] = function()
 	
 end
 
+--Bottom Right
 mtxCommands[1][-1] = function()
 	Block_Down()
 	Face_Right()
@@ -231,6 +231,7 @@ mtxCommands[1][-1] = function()
 	Move_Forward()
 end
 
+--Middle Left
 mtxCommands[-1][0] = function()
 	Face_Left()
 	Block_Forward()
@@ -240,10 +241,12 @@ mtxCommands[-1][0] = function()
 	Move_Up()
 end
 
+--Middle Center
 mtxCommands[0][0] = function()
 	Move_Down()
 end
 
+--Middle Right
 mtxCommands[1][0] = function()
 	Face_Right()
 	Block_Forward()
@@ -253,6 +256,7 @@ mtxCommands[1][0] = function()
 	Move_Down()
 end
 
+--Top Left
 mtxCommands[-1][1] = function()
 	Block_Up()
 	Face_Left()
@@ -261,12 +265,14 @@ mtxCommands[-1][1] = function()
 	Move_Forward()
 end
 
-mtxCommands[-1][0] = function()
+--Top Center
+mtxCommands[0][1] = function()
 	Block_Up()
 	Face_Right()
 	Move_Forward()
 end
 
+--Top Right
 mtxCommands[1][1] = function()
 	Block_Up()
 	Face_Right()
