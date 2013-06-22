@@ -288,11 +288,11 @@ end
 
 --Bottom Center
 mtxCommands[0][-1] = function()
-	Face_Left()
-	
 	if Low_Space() then
 		Unload()
 	end
+
+	Face_Left()
 	
 	if turtle.detect() == true or turtle.detectUp() == true then
 		Block_Down()
