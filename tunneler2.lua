@@ -274,7 +274,7 @@ local intLength = intLength or 5
 if intLength % 5 ~= 0 then
 	intLength = intLength - (intLength % 5)
 end
-
+print(intLength)
 local intStep = 1
 
 local pos = {x=0, y=0, z=0}
