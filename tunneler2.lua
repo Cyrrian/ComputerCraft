@@ -302,7 +302,9 @@ mtxCommands[1][1] = "Top_Right"
 --Main
 ---------------------------------------
 while pos.z <= intLength do
-
-	_G[mtxCommands[pos.x][pos.y]]()
+	print(pos.x)
+	print(pos.y)
+	print(mtxCommands[pos.x][pos.y])
+	--_G[mtxCommands[pos.x][pos.y]]()
 
 end
