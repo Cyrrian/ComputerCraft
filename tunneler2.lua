@@ -192,14 +192,22 @@ end
 --Command Matrix Functions
 -----------------------------
 
-local function Bottom_Left()
+local mtxCommands = {}
+for i = -1, 1 do
+	mtxCommands[i] = {}
+	for j = -1, 1 do
+		mtxCommands[i][j] = 0
+	end
+end
+
+mtxCommands[-1][-1] = function()
 	Block_Down()
 	Face_Left()
 	Block_Forward()
 	Move_Up()
 end
 
-local function Bottom_Center()
+mtxCommands[0][-1] = function()
 	Face_Left()
 	
 	if turtle.detect() == true or turtle.detectUp() == true then
@@ -213,7 +221,7 @@ local function Bottom_Center()
 	
 end
 
-local function Bottom_Right()
+mtxCommands[1][-1] = function()
 	Block_Down()
 	Face_Right()
 	Block_Forward()
@@ -221,7 +229,7 @@ local function Bottom_Right()
 	Move_Forward()
 end
 
-local function Middle_Left()
+mtxCommands[-1][0] = function()
 	Face_Left()
 	Block_Forward()
 	if pos.z % 5 == 0 then 
@@ -230,11 +238,11 @@ local function Middle_Left()
 	Move_Up()
 end
 
-local function Middle_Center()
+mtxCommands[0][0] = function()
 	Move_Down()
 end
 
-local function Middle_Right()
+mtxCommands[1][0] = function()
 	Face_Right()
 	Block_Forward()
 	if pos.z % 5 == 0 then 
@@ -243,7 +251,7 @@ local function Middle_Right()
 	Move_Down()
 end
 
-local function Top_Left()
+mtxCommands[-1][1] = function()
 	Block_Up()
 	Face_Left()
 	Block_Forward()
@@ -251,21 +259,17 @@ local function Top_Left()
 	Move_Forward()
 end
 
-local function Top_Center()
+mtxCommands[-1][0] = function()
 	Block_Up()
 	Face_Right()
 	Move_Forward()
 end
 
-local function Top_Right()
+mtxCommands[1][1] = function()
 	Block_Up()
 	Face_Right()
 	Block_Forward()
 	Move_Down()
-end
-
-local function Command(f)
-	f()
 end
 
 ---------------------------------------
@@ -284,29 +288,11 @@ local intStep = 1
 local pos = {x=0, y=0, z=0}
 local dir = {x=0, z=1}
 
-local mtxCommands = {}
-for i = -1, 1 do
-	mtxCommands[i] = {}
-	for j = -1, 1 do
-		mtxCommands[i][j] = 0
-	end
-end
-
-mtxCommands[-1][-1] = "Bottom_Left"
-mtxCommands[-1][0] = "Bottom_Center"
-mtxCommands[-1][1] = "Bottom_Right"
-mtxCommands[0][-1] = "Middle_Left"
-mtxCommands[0][0] = "Middle_Center"
-mtxCommands[0][1] = "Middle_Right"
-mtxCommands[1][-1] = "Top_Left"
-mtxCommands[1][0] = "Top_Center"
-mtxCommands[1][1] = "Top_Right"
-
 ---------------------------------------
 --Main
 ---------------------------------------
 while pos.z <= intLength do
 
-	Command(mtxCommands[pos.x][pos.y])
+	mtxCommands[pos.x][pos.y]()
 
 end
