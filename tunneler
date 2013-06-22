@@ -62,7 +62,7 @@ end
 function Unload()
 
 	local intChestDistance = pos.z - intLastChest
-	if intChestDistance <= MAX_CHEST_DIST then
+	if intChestDistance <= MAX_CHEST_DISTANCE then
 		Face_Back()
 		for i = 1, intChestDistance do
 			Move_Forward()
@@ -70,6 +70,9 @@ function Unload()
 		Face_Right()
 	else
 		Face_Right()
+		if turtle.detect() then
+			Dig_Forward()
+		end
 		turtle.select(CHEST_SLOT)
 		turtle.place()
 		intLastChest = pos.z
