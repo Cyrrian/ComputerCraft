@@ -290,7 +290,7 @@ mtxCommands[0][-1] = function()
 	
 	if pos.z % 5 == 0 then 
 		print("Current Depth: " .. pos.z)
-	else
+	end
 	
 	turtle.select(BLOCK_SLOT)
 	if turtle.detect() == true or turtle.detectUp() == true or not turtle.compareDown() then
