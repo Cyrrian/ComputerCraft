@@ -14,7 +14,11 @@ CHEST_SLOT = 4
 function GetFacing(locStart)
 	turtle.forward()
 	
+	print("x: " .. locStart.x .. " y: " .. locStart.y .. " z: " .. locStart.z)
+	
 	locNew = vector.new(gps.locate())
+	
+	print("x: " .. locNew.x .. " y: " .. locNew.y .. " z: " .. locNew.z)
 	
 	if locNew.x > locStart.x then
 		return 3
@@ -48,4 +52,4 @@ intFacing = GetFacing(locStart)
 ---------------------------------------
 --Main
 ---------------------------------------
-print("x: " .. locStart.x .. " y: " .. locStart.y .. " z: " .. z .. " f: " .. intFacing)
+print("x: " .. locStart.x .. " y: " .. locStart.y .. " z: " .. locStart.z .. " f: " .. intFacing)
