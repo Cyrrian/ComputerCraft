@@ -61,10 +61,10 @@ end
 
 function Unload()
 
-	local intChestDistance = pos.z - intLastChest or MAX_CHEST_DIST + 1
+	local intChestDistance = pos.z - intLastChest
 	if intChestDistance <= MAX_CHEST_DIST then
 		Face_Back()
-		for local i = 1, intChestDistance do
+		for i = 1, intChestDistance do
 			Move_Forward()
 		end
 		Face_Right()
@@ -84,7 +84,7 @@ function Unload()
 	
 	if intChestDist > 0 then
 		FaceForward()
-		for local i = 1, intChestDistance do
+		for i = 1, intChestDistance do
 			Move_Forward()
 		end
 	end
