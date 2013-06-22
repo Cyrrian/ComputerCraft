@@ -82,7 +82,7 @@ function Light_Forward()
 	
 	Move_Forward()
 	Block_Forward()
-	turtle.back()
+	Move_Back()
 	turtle.select(LIGHT_SLOT)
 	turtle.place()
 end
@@ -90,6 +90,23 @@ end
 -----------------------------
 --Move Functions
 -----------------------------
+
+function Move_Back()
+	Fuel()
+	
+	while not turtle.back() do
+		Turn_Left()
+		Turn_Left()
+		if turtle.detect() then
+			Dig_Forward()
+		end
+		Turn_Right()
+		Turn_Right()
+	end
+	
+	pos.x = pos.x - dir.x
+	pos.z = pos.z - dir.z
+end
 
 function Move_Down()
 	Fuel()
