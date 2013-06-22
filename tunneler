@@ -7,7 +7,7 @@ LIGHT_SLOT = 2
 BLOCK_SLOT = 3
 CHEST_SLOT = 4
 FIRST_OPEN_SLOT = 5
-MAX_CHEST_DIST = 10
+MAX_CHEST_DISTANCE = 10
 
 ---------------------------------------
 --Functions
