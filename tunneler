@@ -52,7 +52,15 @@ end
 
 
 function Low_Space()
-	if turtle.getItemCount(15) > 0 then
+	local intFreeSpace = 16 - FIRST_OPEN_SLOT + 1
+	
+	for i = FIRST_OPEN_SLOT, 16 do
+		if turtle.getItemCount(i) > 0 then
+			intFreeSpace = intFreeSpace - 1
+		end
+	end
+	
+	if intFreeSpace <= 1 then
 		return true
 	end
 	
@@ -60,8 +68,9 @@ function Low_Space()
 end
 
 function Unload()
-
+	local boolFoundBlocks = false
 	local intChestDistance = pos.z - intLastChest
+	
 	if intChestDistance <= MAX_CHEST_DISTANCE then
 		Face_Back()
 		for i = 1, intChestDistance do
@@ -77,7 +86,11 @@ function Unload()
 	for i = FIRST_OPEN_SLOT, 16 do
                 turtle.select(i)
                 if turtle.compareTo(LIGHT_SLOT) ~= true and turtle.compareTo(CHEST_SLOT) ~= true then
-                        turtle.drop()
+			if turtle.compareTo(BLOCK_SLOT) and boolFoundBlocks == false then
+				boolFoundBlocks = true
+			else
+				turtle.drop()
+			end
                 end
         end
 	
