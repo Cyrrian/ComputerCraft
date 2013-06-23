@@ -8,6 +8,7 @@ BLOCK_SLOT = 3
 CHEST_SLOT = 4
 FIRST_OPEN_SLOT = 5
 MAX_CHEST_DISTANCE = 10
+LIGHT_GAP = 6
 
 ---------------------------------------
 --Functions
@@ -15,7 +16,7 @@ MAX_CHEST_DISTANCE = 10
 
 function Check_Complete()
 	
-	if pos.z % 5 == 0 then 
+	if pos.z % LIGHT_GAP == 0 then 
 		print("Current Depth: " .. pos.z)
 	end
 	
@@ -331,7 +332,7 @@ end
 --Middle Left
 mtxCommands[-1][0] = function()
 	Face_Left()
-	if pos.z % 5 == 0 then 
+	if pos.z % LIGHT_GAP == 0 then 
 		Light_Forward()
 	else
 		Block_Forward()
@@ -347,7 +348,7 @@ end
 --Middle Right
 mtxCommands[1][0] = function()
 	Face_Right()
-	if pos.z % 5 == 0 then 
+	if pos.z % LIGHT_GAP == 0 then 
 		Light_Forward()
 	else
 		Block_Forward()
@@ -385,9 +386,9 @@ end
  
 args = { ... }
 intLength = tonumber(args[1])
-intLength = intLength or 5
-if intLength % 5 ~= 0 then
-	intLength = intLength - (intLength % 5)
+intLength = intLength or LIGHT_GAP
+if intLength % LIGHT_GAP ~= 0 then
+	intLength = intLength - (intLength % LIGHT_GAP)
 end
 
 intStep = 1
