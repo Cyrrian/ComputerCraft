@@ -14,6 +14,11 @@ MAX_CHEST_DISTANCE = 10
 ---------------------------------------
 
 function Check_Complete()
+	
+	if pos.z % 5 == 0 then 
+		print("Current Depth: " .. pos.z)
+	end
+	
 	if pos.z == intLength and dir.z == 1 then
 		return true
 	end
@@ -301,10 +306,6 @@ mtxCommands[0][-1] = function()
 		Unload()
 	end
 	
-	if pos.z % 5 == 0 then 
-		print("Current Depth: " .. pos.z)
-	end
-
 	Face_Left()	
 	turtle.select(BLOCK_SLOT)
 	if turtle.detect() == true or turtle.detectUp() == true or not turtle.compareDown() then
