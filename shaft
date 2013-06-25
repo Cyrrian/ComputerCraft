@@ -1,0 +1,321 @@
+---------------------------------------
+--Constants
+---------------------------------------
+ 
+FUEL_SLOT = 1
+LIGHT_SLOT = 2
+BLOCK_SLOT = 3
+CHEST_SLOT = 4
+LADDER_SLOT = 4
+FIRST_OPEN_SLOT = 5
+MAX_CHEST_DISTANCE = 10
+LIGHT_GAP = 6
+
+---------------------------------------
+--Functions
+---------------------------------------
+
+function Check_Complete()
+	
+	if pos.y == 19 then
+		return true
+	end
+	
+	return false
+end
+
+-----------------------------
+--Supply Functions
+-----------------------------
+function Check_Inv(item)
+	if turtle.getItemCount(item) == 1 then
+		for i = FIRST_OPEN_SLOT, 16 do
+			turtle.select(i)
+			if turtle.compareTo(item) == true then
+				if turtle.transferTo(item) ~= true then
+					os.reboot()
+				end
+				turtle.select(FIRST_OPEN_SLOT)
+				break
+			end
+		end
+	end
+end
+
+ function Fuel()
+	local intFuel = turtle.getFuelLevel()
+	
+        if intFuel ~= 'unlimited' and intFuel == 0 then
+		turtle.select(FUEL_SLOT)
+		if turtle.refuel(1) ~= true then
+			os.reboot()
+		end
+        end
+end
+
+
+function Low_Space()
+	local intFreeSpace = 16 - FIRST_OPEN_SLOT + 1
+	
+	for i = FIRST_OPEN_SLOT, 16 do
+		if turtle.getItemCount(i) > 0 then
+			intFreeSpace = intFreeSpace - 1
+		end
+	end
+	
+	if intFreeSpace <= 1 then
+		return true
+	end
+	
+	return false
+end
+
+function Unload()
+	local boolFoundBlocks = false
+	local intChestDistance = pos.z - intLastChest
+	
+	if intChestDistance <= MAX_CHEST_DISTANCE then
+		Face_Back()
+		for i = 1, intChestDistance do
+			Move_Forward()
+		end
+	else
+		Face_Back()
+		turtle.select(CHEST_SLOT)
+		turtle.place()
+		intLastChest = pos.z
+	end
+	
+	for i = FIRST_OPEN_SLOT, 16 do
+                turtle.select(i)
+                if turtle.compareTo(LIGHT_SLOT) ~= true and turtle.compareTo(CHEST_SLOT) ~= true then
+			if turtle.compareTo(BLOCK_SLOT) and boolFoundBlocks == false then
+				boolFoundBlocks = true
+			else
+				turtle.drop()
+			end
+                end
+        end
+	
+	turtle.select(FIRST_OPEN_SLOT)
+	
+	if intChestDistance <= MAX_CHEST_DISTANCE then
+		Face_Front()
+		for i = 1, intChestDistance do
+			Move_Forward()
+		end
+	end
+end
+
+-----------------------------
+--Block Functions
+-----------------------------
+function Block_Down()
+	Check_Inv(BLOCK_SLOT)
+	
+        turtle.select(BLOCK_SLOT)
+        if turtle.compareDown() ~= true then
+                Dig_Down()
+                turtle.select(BLOCK_SLOT)
+                turtle.placeDown()
+        end
+end
+
+function Block_Forward()
+	Check_Inv(BLOCK_SLOT)
+	
+        turtle.select(BLOCK_SLOT)
+        if turtle.compare() ~= true then
+                Dig_Forward()
+                turtle.select(BLOCK_SLOT)
+                turtle.place()
+        end
+end
+ 
+function Block_Up()
+	Check_Inv(BLOCK_SLOT)
+	
+        turtle.select(BLOCK_SLOT)
+        if turtle.compareUp() ~= true then
+                Dig_Up()
+                turtle.select(BLOCK_SLOT)
+                turtle.placeUp()
+        end
+end
+
+function Light_Forward()
+	Check_Inv(LIGHT_SLOT)
+	
+	Move_Forward()
+	Block_Forward()
+	Move_Back()
+	turtle.select(LIGHT_SLOT)
+	turtle.place()
+end
+
+function Ladder_Up()
+	Check_Inv(LADDER_SLOT)
+	
+	turtle.select(LADDER_SLOT)
+	turtle.placeUp()
+end
+-----------------------------
+--Move Functions
+-----------------------------
+
+function Move_Back()
+	Fuel()
+	
+	while not turtle.back() do
+		Turn_Left()
+		Turn_Left()
+		if turtle.detect() then
+			Dig_Forward()
+		end
+		Turn_Right()
+		Turn_Right()
+	end
+	
+	pos.x = pos.x - dir.x
+	pos.z = pos.z - dir.z
+end
+
+function Move_Down()
+	Fuel()
+	
+	while not turtle.down() do
+		if turtle.detectDown() then
+			Dig_Down()
+		end
+	end
+	
+	pos.y = pos.y - 1
+end
+
+function Move_Forward()
+	Fuel()
+	
+	boolComplete = Check_Complete()
+	if boolComplete then
+		return
+	end
+	
+	while not turtle.forward() do
+		if turtle.detect() then
+			Dig_Forward()
+		end
+	end
+	
+	pos.x = pos.x + dir.x
+	pos.z = pos.z + dir.z
+end
+
+function Move_Up()
+	Fuel()
+	
+	while not turtle.up() do
+		if turtle.detectUp() then
+			Dig_Up()
+		end
+	end
+	
+	pos.y = pos.y + 1
+end
+
+-----------------------------
+--Turn Functions
+-----------------------------
+
+function Turn_Left()
+	turtle.turnLeft()
+	dir.x, dir.z = -dir.z, dir.x
+end
+
+function Turn_Right()
+	turtle.turnRight()
+	dir.x, dir.z = dir.z, -dir.x
+end
+
+function Face_Back()
+	while dir.z ~= -1 do
+		Turn_Left()
+	end
+end
+
+function Face_Front()
+	while dir.z ~= 1 do
+		Turn_Right()
+	end
+end
+
+function Face_Left()
+	while dir.x ~= -1 do
+		Turn_Left()
+	end
+end
+
+function Face_Right()
+	while dir.x ~= 1 do
+		Turn_Right()
+	end
+end
+
+-----------------------------
+--Dig Functions
+-----------------------------
+function Dig_Down()
+        while turtle.detectDown() == true do
+                turtle.digDown()
+                sleep(0.5)
+	end 
+end
+ 
+function Dig_Forward()
+        while turtle.detect() == true do
+                turtle.dig()
+                sleep(0.5)
+	end        
+end
+ 
+function Dig_Up()
+        while turtle.detectUp() == true do
+                turtle.digUp()
+                sleep(0.5)
+	end 
+end
+
+---------------------------------------
+--Initialization
+---------------------------------------
+ 
+args = { ... }
+intStartElevation = tonumber(args[1])
+
+boolComplete = false
+
+pos = {x=0, y=0, z=0}
+dir = {x=0, z=1}
+
+---------------------------------------
+--Main
+---------------------------------------
+while not boolComplete do
+	intDepth = (intStartElevation - pos.y)
+	Move_Down()
+	Face_Front()
+	if intDepth > 1 then
+		Ladder_Up()
+	end
+	Block_Forward()
+	Face_Right()
+	Block_Forward()
+	Face_Back()
+	if intDepth % 5 == 0 and intDepth > 0 then
+		Light_Forward()
+	else
+		Block_Forward()
+	end
+	Face_Left()
+	Block_Forward()
+	Check_Complete()
+end
