@@ -313,7 +313,7 @@ while not boolComplete do
 	Face_Right()
 	Block_Forward()
 	Face_Back()
-	if (pos.y - intEndElevation + 3) % 5 == 0 and pos.y < 0 then
+	if (intStartElevation + pos.y - intEndElevation + 3) % 5 == 0 and pos.y < 0 then
 		Light_Forward()
 	else
 		Block_Forward()
