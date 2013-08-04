@@ -303,9 +303,6 @@ while not boolComplete do
 	
 	Move_Down()
 	Face_Front()
-	if intDepth > 1 then
-		Ladder_Up()
-	end
 	Block_Forward()
 	Face_Right()
 	Block_Forward()
@@ -317,5 +314,8 @@ while not boolComplete do
 	end
 	Face_Left()
 	Block_Forward()
+	if intDepth > 1 then
+		Ladder_Up()
+	end
 	Check_Complete()
 end
