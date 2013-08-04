@@ -317,5 +317,5 @@ while not boolComplete do
 	if pos.y < -1 then
 		Ladder_Up()
 	end
-	Check_Complete()
+	boolComplete = Check_Complete()
 end
