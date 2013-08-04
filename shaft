@@ -314,7 +314,7 @@ while not boolComplete do
 	end
 	Face_Left()
 	Block_Forward()
-	if intDepth > 1 then
+	if pos.y < -1 then
 		Ladder_Up()
 	end
 	Check_Complete()
