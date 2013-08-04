@@ -300,7 +300,7 @@ dir = {x=0, z=1}
 --Main
 ---------------------------------------
 while not boolComplete do
-	intDepth = (intStartElevation - pos.y)
+	
 	Move_Down()
 	Face_Front()
 	if intDepth > 1 then
@@ -310,7 +310,7 @@ while not boolComplete do
 	Face_Right()
 	Block_Forward()
 	Face_Back()
-	if intDepth % 5 == 0 and intDepth > 0 then
+	if pos.y % 5 == 0 and pos.y < 0 then
 		Light_Forward()
 	else
 		Block_Forward()
