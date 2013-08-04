@@ -17,7 +17,7 @@ LIGHT_GAP = 6
 
 function Check_Complete()
 	
-	if (intStartElevation + pos.y) == 19 then
+	if (intStartElevation + pos.y) == intEndElevation then
 		return true
 	end
 	
@@ -148,6 +148,11 @@ function Light_Forward()
 	
 	Move_Forward()
 	Block_Forward()
+	Face_Left()
+	Block_Forward()
+	Face_Right()
+	Block_Forward()
+	Face_Back()
 	Move_Back()
 	turtle.select(LIGHT_SLOT)
 	turtle.place()
@@ -290,6 +295,7 @@ end
  
 args = { ... }
 intStartElevation = tonumber(args[1])
+intEndElevation = tonumber(args[2])
 
 boolComplete = false
 
@@ -307,7 +313,7 @@ while not boolComplete do
 	Face_Right()
 	Block_Forward()
 	Face_Back()
-	if pos.y % 5 == 0 and pos.y < 0 then
+	if (pos.y - intEndElevation + 3) % 5 == 0 and pos.y < 0 then
 		Light_Forward()
 	else
 		Block_Forward()
@@ -317,5 +323,5 @@ while not boolComplete do
 	if pos.y < -1 then
 		Ladder_Up()
 	end
-	boolComplete = Check_Complete()
+	booCheck_Complete()
 end
