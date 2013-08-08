@@ -391,13 +391,14 @@ while pos.z < (intCount * 6) do
 
 	Move_Down()
 	Move_Down()
+	Move_Down()
 	
 	Face_Front()
 	Move_Forward()
 	
 	Face_Right()
 	Move_Forward()
-	Face_Forward()
+	Face_Front()
 	Move_Forward()
 	Move_Forward()
 	Face_Left()
@@ -412,7 +413,7 @@ while pos.z < (intCount * 6) do
 	Move_Up()
 	
 	Move_Forward()
-	Face_Forward()
+	Face_Front()
 	Move_Forward()
 	Move_Forward()
 	Face_Left()
@@ -427,7 +428,7 @@ while pos.z < (intCount * 6) do
 	Move_Up()
 	
 	Move_Forward()
-	Face_Forward()
+	Face_Front()
 	Move_Forward()
 	Move_Forward()
 	Face_Left()
@@ -442,7 +443,7 @@ while pos.z < (intCount * 6) do
 	Move_Up()
 	
 	Move_Forward()
-	Face_Forward()
+	Face_Front()
 	Move_Forward()
 	Move_Forward()
 	Face_Left()
@@ -454,7 +455,7 @@ while pos.z < (intCount * 6) do
 	Face_Right()
 	Move_Forward()
 	
-	Face_Forward()
+	Face_Front()
 	Move_Forward()
 	Move_Down()
 	Move_Down()
