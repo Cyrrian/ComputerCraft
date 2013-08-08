@@ -185,11 +185,6 @@ end
 function Move_Forward()
 	Fuel()
 	
-	boolComplete = Check_Complete()
-	if boolComplete then
-		return
-	end
-	
 	while not turtle.forward() do
 		if turtle.detect() then
 			Dig_Forward()
