@@ -395,7 +395,7 @@ while pos.z < (intCount * 6) do
 	
 	Dig_Forward()
 	Face_Right()
-	DigForward()
+	Dig_Forward()
 	Face_Back()
 	Dig_Forward()
 	Face_Left()
@@ -405,7 +405,7 @@ while pos.z < (intCount * 6) do
 	
 	Dig_Forward()
 	Face_Right()
-	DigForward()
+	Dig_Forward()
 	Face_Back()
 	Dig_Forward()
 	Face_Left()
@@ -415,7 +415,7 @@ while pos.z < (intCount * 6) do
 	
 	Dig_Forward()
 	Face_Right()
-	DigForward()
+	Dig_Forward()
 	Face_Back()
 	Dig_Forward()
 	Face_Left()
@@ -425,7 +425,7 @@ while pos.z < (intCount * 6) do
 	
 	Dig_Forward()
 	Face_Right()
-	DigForward()
+	Dig_Forward()
 	Face_Back()
 	Dig_Forward()
 	Face_Left()
