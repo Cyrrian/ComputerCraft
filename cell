@@ -134,19 +134,13 @@ function Block_Up()
         end
 end
 
-function Light_Forward()
+function Place_Light()
 	Check_Inv(LIGHT_SLOT)
 	
-	Move_Forward()
-	Block_Forward()
-	Face_Left()
-	Block_Forward()
-	Face_Right()
-	Block_Forward()
 	Face_Back()
-	Move_Back()
 	turtle.select(LIGHT_SLOT)
 	turtle.place()
+	Face_Front()
 end
 
 -----------------------------
@@ -223,25 +217,41 @@ end
 
 function Face_Back()
 	while dir.z ~= -1 do
-		Turn_Left()
+		if dir.x == 1 then
+			Turn_Right()
+		else
+			Turn_Left()
+		end
 	end
 end
 
 function Face_Front()
 	while dir.z ~= 1 do
-		Turn_Right()
+		if dir.x == 1 then
+			Turn_Left()
+		else
+			Turn_Right()
+		end
 	end
 end
 
 function Face_Left()
 	while dir.x ~= -1 do
-		Turn_Left()
+		if dir.z == 1 then
+			Turn_Left()
+		else
+			Turn_Right()
+		end
 	end
 end
 
 function Face_Right()
 	while dir.x ~= 1 do
-		Turn_Right()
+		if dir.z == 1 then
+			Turn_Right()
+		else
+			Turn_Left()
+		end
 	end
 end
 
@@ -334,6 +344,7 @@ while pos.z < (intCount * 4) do
 	Move_Down()
 	Move_Down()
 	Move_Forward()
+	Place_Light()
 	Move_Forward()
 	Dig_Up()
 	
