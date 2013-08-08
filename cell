@@ -261,21 +261,21 @@ end
 function Dig_Down()
         while turtle.detectDown() == true do
                 turtle.digDown()
-                sleep(0.5)
+                sleep(0.25)
 	end 
 end
  
 function Dig_Forward()
         while turtle.detect() == true do
                 turtle.dig()
-                sleep(0.5)
+                sleep(0.25)
 	end        
 end
  
 function Dig_Up()
         while turtle.detectUp() == true do
                 turtle.digUp()
-                sleep(0.5)
+                sleep(0.25)
 	end 
 end
 
