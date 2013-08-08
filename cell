@@ -303,7 +303,7 @@ while pos.z < (intCount * 4) do
 	
 	Move_Up()
 	Move_Forward()
-	Face_Forward()
+	Face_Front()
 	Move_Forward()
 	Move_Forward()
 	Face_Left()
@@ -317,7 +317,7 @@ while pos.z < (intCount * 4) do
 	
 	Move_Up()
 	Move_Forward()
-	Face_Forward()
+	Face_Front()
 	Move_Forward()
 	Move_Forward()
 	Face_Left()
