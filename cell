@@ -42,23 +42,6 @@ end
         end
 end
 
-
-function Low_Space()
-	local intFreeSpace = 16 - FIRST_OPEN_SLOT + 1
-	
-	for i = FIRST_OPEN_SLOT, 16 do
-		if turtle.getItemCount(i) > 0 then
-			intFreeSpace = intFreeSpace - 1
-		end
-	end
-	
-	if intFreeSpace <= 1 then
-		return true
-	end
-	
-	return false
-end
-
 function Unload()
 	local boolFoundBlocks = false
 
