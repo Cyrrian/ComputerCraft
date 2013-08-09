@@ -121,6 +121,7 @@ end
 function Place_Light()
 	Check_Inv(LIGHT_SLOT)
 	
+	Dig_Forward()
 	turtle.select(LIGHT_SLOT)
 	turtle.place()
 end
