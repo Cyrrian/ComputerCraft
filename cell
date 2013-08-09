@@ -6,10 +6,8 @@ FUEL_SLOT = 1
 LIGHT_SLOT = 2
 BLOCK_SLOT = 3
 CHEST_SLOT = 4
-LADDER_SLOT = 4
 FIRST_OPEN_SLOT = 5
-MAX_CHEST_DISTANCE = 10
-LIGHT_GAP = 6
+
 
 ---------------------------------------
 --Functions
@@ -280,6 +278,7 @@ dir = {x=0, z=1}
 ---------------------------------------
 while pos.z < (intCount * 6) do
 	
+	--Pass 1 - First Half of First Row
 	Move_Forward()
 	Dig_Up()
 	Dig_Down()
@@ -294,6 +293,7 @@ while pos.z < (intCount * 6) do
 	Dig_Up()
 	Dig_Down()
 	
+	--Pass 1 - Second Row
 	Face_Front()
 	Move_Forward()
 	Dig_Up()
@@ -318,6 +318,7 @@ while pos.z < (intCount * 6) do
 	Dig_Up()
 	Dig_Down()
 	
+	--Pass 1 - Third Row
 	Face_Front()
 	Move_Forward()
 	Dig_Up()
@@ -342,6 +343,7 @@ while pos.z < (intCount * 6) do
 	Dig_Up()
 	Dig_Down()
 	
+	--Pass 1 - Fourth Row
 	Face_Front()
 	Move_Forward()
 	Dig_Up()
@@ -366,6 +368,7 @@ while pos.z < (intCount * 6) do
 	Dig_Up()
 	Dig_Down()
 	
+	--Pass 1 - Fifth Row
 	Face_Front()
 	Move_Forward()
 	Dig_Up()
@@ -390,6 +393,7 @@ while pos.z < (intCount * 6) do
 	Dig_Up()
 	Dig_Down()
 	
+	--Pass 1 - Sixth Row
 	Face_Front()
 	Move_Forward()
 	Dig_Up()
@@ -414,6 +418,7 @@ while pos.z < (intCount * 6) do
 	Dig_Up()
 	Dig_Down()
 	
+	--Pass 1 - Seventh Row
 	Face_Front()
 	Move_Forward()
 	Dig_Up()
@@ -438,14 +443,15 @@ while pos.z < (intCount * 6) do
 	Dig_Up()
 	Dig_Down()
 	
+	
+	--Move Up For Pass 2
 	Move_Up()
 	Move_Up()
 	Move_Up()
 	
+	--Pass 2 - First Row
 	Face_Right()
-	Move_Forward()
 	Block_Up()
-	Dig_Down()
 	Move_Forward()
 	Block_Up()
 	Dig_Down()
@@ -465,6 +471,7 @@ while pos.z < (intCount * 6) do
 	Block_Up()
 	Dig_Down()
 	
+	--Pass 2 - Second Row
 	Face_Back()
 	Move_Forward()
 	Block_Up()
@@ -489,6 +496,7 @@ while pos.z < (intCount * 6) do
 	Block_Up()
 	Dig_Down()
 	
+	--Pass 2 - Third Row
 	Face_Back()
 	Move_Forward()
 	Block_Up()
@@ -513,6 +521,7 @@ while pos.z < (intCount * 6) do
 	Block_Up()
 	Dig_Down()
 	
+	--Pass 2 - Fourth Row
 	Face_Back()
 	Move_Forward()
 	Block_Up()
@@ -537,6 +546,7 @@ while pos.z < (intCount * 6) do
 	Block_Up()
 	Dig_Down()
 	
+	--Pass 2 - Fifth Row
 	Face_Back()
 	Move_Forward()
 	Block_Up()
@@ -561,6 +571,7 @@ while pos.z < (intCount * 6) do
 	Block_Up()
 	Dig_Down()
 	
+	--Pass 2 - Sixth Row
 	Face_Back()
 	Move_Forward()
 	Block_Up()
@@ -585,6 +596,7 @@ while pos.z < (intCount * 6) do
 	Block_Up()
 	Dig_Down()
 	
+	--Pass 2 - Seventh Row
 	Face_Back()
 	Move_Forward()
 	Block_Up()
@@ -609,6 +621,7 @@ while pos.z < (intCount * 6) do
 	Block_Up()
 	Dig_Down()
 	
+	--Pass 1 - First Half of First Row
 	Face_Left()
 	Move_Down()
 	Move_Down()
@@ -622,6 +635,7 @@ while pos.z < (intCount * 6) do
 	Dig_Down()
 	Move_Forward()
 	
+	--Unload And Move To Next Room
 	Face_Front()
 	Move_Forward()
 	Move_Forward()
