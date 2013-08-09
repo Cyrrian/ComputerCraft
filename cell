@@ -121,7 +121,7 @@ function Place_Light()
 	Check_Inv(LIGHT_SLOT)
 	
 	turtle.select(LIGHT_SLOT)
-	turtle.placeUp()
+	turtle.placeDown()
 
 end
 
@@ -436,9 +436,6 @@ while pos.z < (intCount * 8) do
 	Move_Forward()
 	Dig_Up()
 	Dig_Down()
-	Face_Front()
-	Place_Light()
-	Face_Left()
 	Move_Forward()
 	Dig_Up()
 	Dig_Down()
@@ -467,6 +464,9 @@ while pos.z < (intCount * 8) do
 	Move_Forward()
 	Block_Up()
 	Dig_Down()
+	Move_Down()
+	Place_Light()
+	Move_Up()
 	Move_Forward()
 	Block_Up()
 	Dig_Down()
@@ -532,6 +532,9 @@ while pos.z < (intCount * 8) do
 	Move_Forward()
 	Block_Up()
 	Dig_Down()
+	Move_Down()
+	Place_Light()
+	Move_Up()
 	Face_Left()
 	Move_Forward()
 	Block_Up()
@@ -551,6 +554,9 @@ while pos.z < (intCount * 8) do
 	Move_Forward()
 	Block_Up()
 	Dig_Down()
+	Move_Down()
+	Place_Light()
+	Move_Up()
 	
 	--Pass 2 - Fifth Row
 	Face_Back()
@@ -617,6 +623,9 @@ while pos.z < (intCount * 8) do
 	Move_Forward()
 	Block_Up()
 	Dig_Down()
+	Move_Down()
+	Place_Light()
+	Move_Up()
 	Move_Forward()
 	Block_Up()
 	Dig_Down()
@@ -641,7 +650,6 @@ while pos.z < (intCount * 8) do
 	Dig_Down()
 	Move_Forward()
 	Face_Back()
-	Place_Light()
 	
 	--Unload And Move To Next Room
 	Face_Front()
