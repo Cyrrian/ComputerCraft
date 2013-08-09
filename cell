@@ -282,8 +282,6 @@ while pos.z < (intCount * 8) do
 	Move_Forward()
 	Dig_Up()
 	Dig_Down()
-	Face_Back()
-	Place_Light()
 	Face_Left()
 	Move_Forward()
 	Dig_Up()
@@ -352,7 +350,6 @@ while pos.z < (intCount * 8) do
 	Dig_Down()
 	Face_Left()
 	Dig_Forward()
-	Place_Light()
 	Face_Right()
 	Move_Forward()
 	Dig_Up()
@@ -373,7 +370,6 @@ while pos.z < (intCount * 8) do
 	Dig_Up()
 	Dig_Down()
 	Dig_Forward()
-	Place_Light()
 	
 	--Pass 1 - Fifth Row
 	Face_Front()
@@ -644,6 +640,8 @@ while pos.z < (intCount * 8) do
 	Dig_Up()
 	Dig_Down()
 	Move_Forward()
+	Face_Back()
+	Place_Light()
 	
 	--Unload And Move To Next Room
 	Face_Front()
