@@ -62,7 +62,6 @@ end
 function Unload()
 	local boolFoundBlocks = false
 
-	Face_Back()
 	turtle.select(CHEST_SLOT)
 	turtle.placeDown()
 
@@ -121,9 +120,9 @@ end
 function Place_Light()
 	Check_Inv(LIGHT_SLOT)
 	
-	Dig_Forward()
 	turtle.select(LIGHT_SLOT)
-	turtle.place()
+	turtle.placeUp()
+
 end
 
 -----------------------------
@@ -277,7 +276,7 @@ dir = {x=0, z=1}
 ---------------------------------------
 --Main
 ---------------------------------------
-while pos.z < (intCount * 6) do
+while pos.z < (intCount * 8) do
 	
 	--Pass 1 - First Half of First Row
 	Move_Forward()
@@ -300,6 +299,7 @@ while pos.z < (intCount * 6) do
 	Dig_Up()
 	Dig_Down()
 	Face_Right()
+	Place_Light()
 	Move_Forward()
 	Dig_Up()
 	Dig_Down()
@@ -318,6 +318,7 @@ while pos.z < (intCount * 6) do
 	Move_Forward()
 	Dig_Up()
 	Dig_Down()
+	Place_Light()
 	
 	--Pass 1 - Third Row
 	Face_Front()
@@ -349,6 +350,8 @@ while pos.z < (intCount * 6) do
 	Move_Forward()
 	Dig_Up()
 	Dig_Down()
+	Face_Left()
+	Dig_Forward()
 	Face_Right()
 	Move_Forward()
 	Dig_Up()
@@ -368,6 +371,7 @@ while pos.z < (intCount * 6) do
 	Move_Forward()
 	Dig_Up()
 	Dig_Down()
+	Dig_Forward()
 	
 	--Pass 1 - Fifth Row
 	Face_Front()
@@ -400,6 +404,7 @@ while pos.z < (intCount * 6) do
 	Dig_Up()
 	Dig_Down()
 	Face_Right()
+	Place_Light()
 	Move_Forward()
 	Dig_Up()
 	Dig_Down()
@@ -418,6 +423,7 @@ while pos.z < (intCount * 6) do
 	Move_Forward()
 	Dig_Up()
 	Dig_Down()
+	Place_Light()
 	
 	--Pass 1 - Seventh Row
 	Face_Front()
