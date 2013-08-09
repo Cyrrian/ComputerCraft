@@ -649,7 +649,6 @@ while pos.z < (intCount * 8) do
 	Dig_Up()
 	Dig_Down()
 	Move_Forward()
-	Face_Back()
 	
 	--Unload And Move To Next Room
 	Face_Front()
