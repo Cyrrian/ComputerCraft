@@ -7,16 +7,19 @@ LIGHT_SLOT = 2
 BLOCK_SLOT = 3
 CHEST_SLOT = 4
 FIRST_OPEN_SLOT = 5
+
 MAX_CHEST_DISTANCE = 10
+
 LIGHT_GAP = 6
 
+DIG_LAG = 0.25
 ---------------------------------------
 --Functions
 ---------------------------------------
 
 function Check_Complete()
 	
-	if pos.z == intLength and dir.z == 1 then
+	if pos.z == intLength then
 		return true
 	end
 	
@@ -187,12 +190,7 @@ end
 
 function Move_Forward()
 	Fuel()
-	
-	boolComplete = Check_Complete()
-	if boolComplete then
-		return
-	end
-	
+
 	while not turtle.forward() do
 		if turtle.detect() then
 			Dig_Forward()
@@ -231,25 +229,41 @@ end
 
 function Face_Back()
 	while dir.z ~= -1 do
-		Turn_Left()
+		if dir.x == 1 then
+			Turn_Right()
+		else
+			Turn_Left()
+		end
 	end
 end
 
 function Face_Front()
 	while dir.z ~= 1 do
-		Turn_Right()
+		if dir.x == 1 then
+			Turn_Left()
+		else
+			Turn_Right()
+		end
 	end
 end
 
 function Face_Left()
 	while dir.x ~= -1 do
-		Turn_Left()
+		if dir.z == 1 then
+			Turn_Left()
+		else
+			Turn_Right()
+		end
 	end
 end
 
 function Face_Right()
 	while dir.x ~= 1 do
-		Turn_Right()
+		if dir.z == 1 then
+			Turn_Right()
+		else
+			Turn_Left()
+		end
 	end
 end
 
@@ -259,21 +273,21 @@ end
 function Dig_Down()
         while turtle.detectDown() == true do
                 turtle.digDown()
-                sleep(0.5)
+                sleep(DIG_LAG)
 	end 
 end
  
 function Dig_Forward()
         while turtle.detect() == true do
                 turtle.dig()
-                sleep(0.5)
+                sleep(DIG_LAG)
 	end        
 end
  
 function Dig_Up()
         while turtle.detectUp() == true do
                 turtle.digUp()
-                sleep(0.5)
+                sleep(DIG_LAG)
 	end 
 end
 
@@ -316,7 +330,14 @@ mtxCommands[0][-1] = function()
 		Move_Forward()
 	elseif not boolComplete then
 		Face_Front()
-		Move_Forward()
+		
+		boolComplete = Check_Complete()
+		
+		if boolComplete then
+			return
+		else
+			Move_Forward()
+		end
 	end
 	
 end

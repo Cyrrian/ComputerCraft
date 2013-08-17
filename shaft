@@ -5,12 +5,12 @@
 FUEL_SLOT = 1
 LIGHT_SLOT = 2
 BLOCK_SLOT = 3
-CHEST_SLOT = 4
 LADDER_SLOT = 4
 FIRST_OPEN_SLOT = 5
-MAX_CHEST_DISTANCE = 10
+
 LIGHT_GAP = 6
 
+DIG_LAG = 0.25
 ---------------------------------------
 --Functions
 ---------------------------------------
@@ -51,60 +51,6 @@ end
 			os.reboot()
 		end
         end
-end
-
-
-function Low_Space()
-	local intFreeSpace = 16 - FIRST_OPEN_SLOT + 1
-	
-	for i = FIRST_OPEN_SLOT, 16 do
-		if turtle.getItemCount(i) > 0 then
-			intFreeSpace = intFreeSpace - 1
-		end
-	end
-	
-	if intFreeSpace <= 1 then
-		return true
-	end
-	
-	return false
-end
-
-function Unload()
-	local boolFoundBlocks = false
-	local intChestDistance = pos.z - intLastChest
-	
-	if intChestDistance <= MAX_CHEST_DISTANCE then
-		Face_Back()
-		for i = 1, intChestDistance do
-			Move_Forward()
-		end
-	else
-		Face_Back()
-		turtle.select(CHEST_SLOT)
-		turtle.place()
-		intLastChest = pos.z
-	end
-	
-	for i = FIRST_OPEN_SLOT, 16 do
-                turtle.select(i)
-                if turtle.compareTo(LIGHT_SLOT) ~= true and turtle.compareTo(CHEST_SLOT) ~= true then
-			if turtle.compareTo(BLOCK_SLOT) and boolFoundBlocks == false then
-				boolFoundBlocks = true
-			else
-				turtle.drop()
-			end
-                end
-        end
-	
-	turtle.select(FIRST_OPEN_SLOT)
-	
-	if intChestDistance <= MAX_CHEST_DISTANCE then
-		Face_Front()
-		for i = 1, intChestDistance do
-			Move_Forward()
-		end
-	end
 end
 
 -----------------------------
@@ -200,11 +146,6 @@ end
 function Move_Forward()
 	Fuel()
 	
-	boolComplete = Check_Complete()
-	if boolComplete then
-		return
-	end
-	
 	while not turtle.forward() do
 		if turtle.detect() then
 			Dig_Forward()
@@ -243,25 +184,41 @@ end
 
 function Face_Back()
 	while dir.z ~= -1 do
-		Turn_Left()
+		if dir.x == 1 then
+			Turn_Right()
+		else
+			Turn_Left()
+		end
 	end
 end
 
 function Face_Front()
 	while dir.z ~= 1 do
-		Turn_Right()
+		if dir.x == 1 then
+			Turn_Left()
+		else
+			Turn_Right()
+		end
 	end
 end
 
 function Face_Left()
 	while dir.x ~= -1 do
-		Turn_Left()
+		if dir.z == 1 then
+			Turn_Left()
+		else
+			Turn_Right()
+		end
 	end
 end
 
 function Face_Right()
 	while dir.x ~= 1 do
-		Turn_Right()
+		if dir.z == 1 then
+			Turn_Right()
+		else
+			Turn_Left()
+		end
 	end
 end
 
@@ -271,21 +228,21 @@ end
 function Dig_Down()
         while turtle.detectDown() == true do
                 turtle.digDown()
-                sleep(0.5)
+                sleep(DIG_LAG)
 	end 
 end
  
 function Dig_Forward()
         while turtle.detect() == true do
                 turtle.dig()
-                sleep(0.5)
+                sleep(DIG_LAG)
 	end        
 end
  
 function Dig_Up()
         while turtle.detectUp() == true do
                 turtle.digUp()
-                sleep(0.5)
+                sleep(DIG_LAG)
 	end 
 end
 
