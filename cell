@@ -8,7 +8,7 @@ BLOCK_SLOT = 3
 CHEST_SLOT = 4
 FIRST_OPEN_SLOT = 5
 
-DIG_LAG = 0.25
+DIG_LAG = 0.35
 ---------------------------------------
 --Functions
 ---------------------------------------
