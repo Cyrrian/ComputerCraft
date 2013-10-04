@@ -395,7 +395,6 @@ if intLength % LIGHT_GAP ~= 0 then
 end
 
 intStep = 1
-intLastChest = -MAX_CHEST_DISTANCE
 
 boolComplete = false
 
