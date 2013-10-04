@@ -269,10 +269,8 @@ end
 --Dig Functions
 -----------------------------
 function Dig_Down()
-        while turtle.detectDown() == true do
-                turtle.digDown()
-                sleep(DIG_LAG)
-	end 
+	turtle.digDown()
+	sleep(DIG_LAG)
 end
  
 function Dig_Forward()
