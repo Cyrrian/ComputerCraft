@@ -140,7 +140,7 @@ function Light_Back()
 	Face_Back()
 	turtle.select(LIGHT_SLOT)
 	turtle.place()
-	Face_Front()
+	Face_Left()
 end
 
 -----------------------------
