@@ -1,0 +1,410 @@
+---------------------------------------
+--Constants
+---------------------------------------
+ 
+FUEL_SLOT = 1
+LIGHT_SLOT = 2
+BLOCK_SLOT = 3
+FIRST_OPEN_SLOT = 4
+
+LIGHT_GAP = 4
+
+DIG_LAG = 0.5
+---------------------------------------
+--Functions
+---------------------------------------
+
+function Check_Complete()
+	
+	if pos.z == intLength then
+		return true
+	end
+	
+	return false
+end
+
+-----------------------------
+--Supply Functions
+-----------------------------
+function Check_Inv(item)
+	if turtle.getItemCount(item) == 1 then
+		for i = FIRST_OPEN_SLOT, 16 do
+			turtle.select(i)
+			if turtle.compareTo(item) == true then
+				if turtle.transferTo(item) ~= true then
+					os.reboot()
+				end
+				turtle.select(FIRST_OPEN_SLOT)
+				break
+			end
+		end
+	end
+end
+
+ function Fuel()
+	local intFuel = turtle.getFuelLevel()
+	
+        if intFuel ~= 'unlimited' and intFuel == 0 then
+		turtle.select(FUEL_SLOT)
+		if turtle.refuel(1) ~= true then
+			os.reboot()
+		end
+        end
+end
+
+
+function Low_Space()
+	local intFreeSpace = 16 - FIRST_OPEN_SLOT + 1
+	
+	for i = FIRST_OPEN_SLOT, 16 do
+		if turtle.getItemCount(i) > 0 then
+			intFreeSpace = intFreeSpace - 1
+		end
+	end
+	
+	if intFreeSpace <= 1 then
+		return true
+	end
+	
+	return false
+end
+
+function Unload()
+	local boolFoundBlocks = false
+	
+	intPosZ = pos.z
+	
+	Face_Back()
+	for i = 1, pos.z do
+		Move_Forward()
+	end
+	
+	for i = FIRST_OPEN_SLOT, 16 do
+		turtle.select(i)
+        if turtle.compareTo(LIGHT_SLOT) ~= true and turtle.compareTo(CHEST_SLOT) ~= true then
+			if turtle.compareTo(BLOCK_SLOT) and boolFoundBlocks == false then
+				boolFoundBlocks = true
+			else
+				turtle.drop()
+			end
+        end
+	end
+	
+	turtle.select(FIRST_OPEN_SLOT)
+
+	Face_Front()
+	for i = 1, intPosZ do
+		Move_Forward()
+	end
+end
+
+-----------------------------
+--Block Functions
+-----------------------------
+function Block_Down()
+	Check_Inv(BLOCK_SLOT)
+	
+        turtle.select(BLOCK_SLOT)
+        if turtle.compareDown() ~= true then
+                Dig_Down()
+                turtle.select(BLOCK_SLOT)
+                turtle.placeDown()
+        end
+end
+
+function Block_Forward()
+	Check_Inv(BLOCK_SLOT)
+	
+        turtle.select(BLOCK_SLOT)
+        if turtle.compare() ~= true then
+                Dig_Forward()
+                turtle.select(BLOCK_SLOT)
+                turtle.place()
+        end
+end
+ 
+function Block_Up()
+	Check_Inv(BLOCK_SLOT)
+	
+        turtle.select(BLOCK_SLOT)
+        if turtle.compareUp() ~= true then
+                Dig_Up()
+                turtle.select(BLOCK_SLOT)
+                turtle.placeUp()
+        end
+end
+
+function Light_Back()
+	Check_Inv(LIGHT_SLOT)
+	
+	Face_Back()
+	turtle.select(LIGHT_SLOT)
+	turtle.place()
+	Face_Front()
+end
+
+-----------------------------
+--Move Functions
+-----------------------------
+
+function Move_Back()
+	Fuel()
+	
+	while not turtle.back() do
+		Turn_Left()
+		Turn_Left()
+		if turtle.detect() then
+			Dig_Forward()
+		end
+		Turn_Right()
+		Turn_Right()
+	end
+	
+	pos.x = pos.x - dir.x
+	pos.z = pos.z - dir.z
+end
+
+function Move_Down()
+	Fuel()
+	
+	while not turtle.down() do
+		if turtle.detectDown() then
+			Dig_Down()
+		end
+	end
+	
+	pos.y = pos.y - 1
+end
+
+function Move_Forward()
+	Fuel()
+
+	while not turtle.forward() do
+		if turtle.detect() then
+			Dig_Forward()
+		end
+	end
+	
+	pos.x = pos.x + dir.x
+	pos.z = pos.z + dir.z
+end
+
+function Move_Up()
+	Fuel()
+	
+	while not turtle.up() do
+		if turtle.detectUp() then
+			Dig_Up()
+		end
+	end
+	
+	pos.y = pos.y + 1
+end
+
+-----------------------------
+--Turn Functions
+-----------------------------
+
+function Turn_Left()
+	turtle.turnLeft()
+	dir.x, dir.z = -dir.z, dir.x
+end
+
+function Turn_Right()
+	turtle.turnRight()
+	dir.x, dir.z = dir.z, -dir.x
+end
+
+function Face_Back()
+	while dir.z ~= -1 do
+		if dir.x == 1 then
+			Turn_Right()
+		else
+			Turn_Left()
+		end
+	end
+end
+
+function Face_Front()
+	while dir.z ~= 1 do
+		if dir.x == 1 then
+			Turn_Left()
+		else
+			Turn_Right()
+		end
+	end
+end
+
+function Face_Left()
+	while dir.x ~= -1 do
+		if dir.z == 1 then
+			Turn_Left()
+		else
+			Turn_Right()
+		end
+	end
+end
+
+function Face_Right()
+	while dir.x ~= 1 do
+		if dir.z == 1 then
+			Turn_Right()
+		else
+			Turn_Left()
+		end
+	end
+end
+
+-----------------------------
+--Dig Functions
+-----------------------------
+function Dig_Down()
+        while turtle.detectDown() == true do
+                turtle.digDown()
+                sleep(DIG_LAG)
+	end 
+end
+ 
+function Dig_Forward()
+        while turtle.detect() == true do
+                turtle.dig()
+                sleep(DIG_LAG)
+	end        
+end
+ 
+function Dig_Up()
+        while turtle.detectUp() == true do
+                turtle.digUp()
+                sleep(DIG_LAG)
+	end 
+end
+
+-----------------------------
+--Command Matrix Functions
+-----------------------------
+
+mtxCommands = {}
+for i = -1, 1 do
+	mtxCommands[i] = {}
+	for j = -1, 1 do
+		mtxCommands[i][j] = 0
+	end
+end
+
+--Bottom Left
+mtxCommands[-1][-1] = function()
+	Block_Down()
+	Face_Left()
+	Block_Forward()
+	Move_Up()
+end
+
+--Bottom Center
+mtxCommands[0][-1] = function()
+	if Low_Space() then
+		Unload()
+	end
+	
+	Face_Left()	
+	turtle.select(BLOCK_SLOT)
+	if turtle.detect() == true or turtle.detectUp() == true or not turtle.compareDown() then
+			
+		if pos.z % LIGHT_GAP == 0 then 
+			print("Current Depth: " .. pos.z)
+			Light_Back()
+		end
+	
+		Block_Down()
+		Dig_Up()
+		Move_Forward()
+	elseif not boolComplete then
+		Face_Front()
+		
+		boolComplete = Check_Complete()
+		
+		if boolComplete then
+			return
+		else
+			Move_Forward()
+		end
+	end
+	
+end
+
+--Bottom Right
+mtxCommands[1][-1] = function()
+	Block_Down()
+	Face_Right()
+	Block_Forward()
+	Face_Left()
+	Move_Forward()
+end
+
+--Middle Left
+mtxCommands[-1][0] = function()
+	Face_Left()
+	Block_Forward()
+	Move_Up()
+end
+
+--Middle Center
+mtxCommands[0][0] = function()
+	Move_Down()
+end
+
+--Middle Right
+mtxCommands[1][0] = function()
+	Face_Right()
+	Block_Forward()
+	Move_Down()
+end
+
+--Top Left
+mtxCommands[-1][1] = function()
+	Block_Up()
+	Face_Left()
+	Block_Forward()
+	Face_Right()
+	Move_Forward()
+end
+
+--Top Center
+mtxCommands[0][1] = function()
+	Block_Up()
+	Face_Right()
+	Move_Forward()
+end
+
+--Top Right
+mtxCommands[1][1] = function()
+	Block_Up()
+	Face_Right()
+	Block_Forward()
+	Move_Down()
+end
+
+---------------------------------------
+--Initialization
+---------------------------------------
+ 
+args = { ... }
+intLength = tonumber(args[1])
+intLength = intLength or LIGHT_GAP
+if intLength % LIGHT_GAP ~= 0 then
+	intLength = intLength - (intLength % LIGHT_GAP)
+end
+
+intStep = 1
+intLastChest = -MAX_CHEST_DISTANCE
+
+boolComplete = false
+
+pos = {x=0, y=0, z=0}
+dir = {x=0, z=1}
+
+---------------------------------------
+--Main
+---------------------------------------
+while not boolComplete do
+	mtxCommands[pos.x][pos.y]()
+end
