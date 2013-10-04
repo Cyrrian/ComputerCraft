@@ -315,7 +315,7 @@ mtxCommands[0][-1] = function()
 	
 	Face_Left()	
 	turtle.select(BLOCK_SLOT)
-	if turtle.detect() == true or turtle.detectUp() == true or not turtle.compareDown() then
+	if turtle.detect() == true or turtle.detectUp() == true or (not turtle.compareDown() and turtle.digDown()) then
 			
 		if pos.z % LIGHT_GAP == 0 then 
 			print("Current Depth: " .. pos.z)
