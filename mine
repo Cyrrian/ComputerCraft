@@ -76,12 +76,12 @@ function Unload()
 	
 	Face_Back()
 	for i = 1, pos.z do
-		Move_Forward()
+		Move_Forward_ND()
 	end
 	
 	for i = FIRST_OPEN_SLOT, 16 do
 		turtle.select(i)
-        if turtle.compareTo(LIGHT_SLOT) ~= true and turtle.compareTo(CHEST_SLOT) ~= true then
+        if turtle.compareTo(LIGHT_SLOT) ~= true then
 			if turtle.compareTo(BLOCK_SLOT) and boolFoundBlocks == false then
 				boolFoundBlocks = true
 			else
@@ -94,7 +94,7 @@ function Unload()
 
 	Face_Front()
 	for i = 1, intPosZ do
-		Move_Forward()
+		Move_Forward_ND()
 	end
 end
 
@@ -201,6 +201,14 @@ function Move_Up()
 	pos.y = pos.y + 1
 end
 
+function Move_Forward_ND()
+	Fuel()
+
+	turtle.forward()
+	
+	pos.x = pos.x + dir.x
+	pos.z = pos.z + dir.z
+end
 -----------------------------
 --Turn Functions
 -----------------------------
