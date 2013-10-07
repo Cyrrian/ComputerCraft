@@ -157,7 +157,7 @@ end
 ---------------------------------------
 args = { ... }
 
-intLength = tonumber(args(1))
+intLength = tonumber(args[1])
 
 pos = {x=0, y=0, z=0}
 dir = {x=0, z=1}
