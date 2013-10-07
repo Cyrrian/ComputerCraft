@@ -1,0 +1,172 @@
+---------------------------------------
+--Constants
+---------------------------------------
+FUEL_SLOT = 1
+DIG_LAG = 0.5
+
+-----------------------------
+--Move Functions
+-----------------------------
+function Move_Back()
+	Fuel()
+
+	while not turtle.back() do
+		Turn_Left()
+		Turn_Left()
+		if turtle.detect() then
+			Dig_Forward()
+		end
+		Turn_Right()
+		Turn_Right()
+	end
+
+	pos.x = pos.x - dir.x
+	pos.z = pos.z - dir.z
+end
+
+function Move_Down()
+	Fuel()
+
+	while not turtle.down() do
+		if turtle.detectDown() then
+			Dig_Down()
+		end
+	end
+
+	pos.y = pos.y - 1
+end
+
+function Move_Forward()
+	Fuel()
+
+	while not turtle.forward() do
+		if turtle.detect() then
+			Dig_Forward()
+		end
+	end
+
+	pos.x = pos.x + dir.x
+	pos.z = pos.z + dir.z
+end
+
+function Move_Up()
+	Fuel()
+
+	while not turtle.up() do
+		if turtle.detectUp() then
+			Dig_Up()
+		end
+	end
+
+	pos.y = pos.y + 1
+end
+
+-----------------------------
+--Turn Functions
+-----------------------------
+function Turn_Left()
+	turtle.turnLeft()
+	dir.x, dir.z = -dir.z, dir.x
+end
+
+function Turn_Right()
+	turtle.turnRight()
+	dir.x, dir.z = dir.z, -dir.x
+end
+
+function Face_Back()
+	while dir.z ~= -1 do
+		if dir.x == 1 then
+			Turn_Right()
+		else
+			Turn_Left()
+		end
+	end
+end
+
+function Face_Front()
+	while dir.z ~= 1 do
+		if dir.x == 1 then
+			Turn_Left()
+		else
+			Turn_Right()
+		end
+	end
+end
+
+function Face_Left()
+	while dir.x ~= -1 do
+		if dir.z == 1 then
+			Turn_Left()
+		else
+			Turn_Right()
+		end
+	end
+end
+
+function Face_Right()
+	while dir.x ~= 1 do
+		if dir.z == 1 then
+			Turn_Right()
+		else
+			Turn_Left()
+		end
+	end
+end
+
+-----------------------------
+--Dig Functions
+-----------------------------
+function Dig_Down()
+        while turtle.detectDown() == true do
+                turtle.digDown()
+                sleep(DIG_LAG)
+	end 
+end
+ 
+function Dig_Forward()
+        while turtle.detect() == true do
+                turtle.dig()
+                sleep(DIG_LAG)
+	end        
+end
+ 
+function Dig_Up()
+        while turtle.detectUp() == true do
+                turtle.digUp()
+                sleep(DIG_LAG)
+	end 
+end
+
+---------------------------------------
+--Misc Functions
+---------------------------------------
+function Fuel()
+	local intFuel = turtle.getFuelLevel()
+
+  if intFuel ~= 'unlimited' and intFuel == 0 then
+    turtle.select(FUEL_SLOT)
+    if turtle.refuel(1) ~= true then
+      os.reboot()
+    end
+  end
+end
+
+---------------------------------------
+--Initialization
+---------------------------------------
+args = { ... }
+
+intLength = tonumber(args(1))
+
+pos = {x=0, y=0, z=0}
+dir = {x=0, z=1}
+
+---------------------------------------
+--Main
+---------------------------------------
+while pos.z < intLength
+  Move_Forward()
+  Dig_Up()
+  Dig_Down()
+end
