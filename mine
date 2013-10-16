@@ -151,7 +151,7 @@ function Light_Up()
 	turtle.placeUp()
 end
 
-function Light_Back()
+function Light_Down()
 	Check_Inv(LIGHT_SLOT)
 
 	turtle.select(LIGHT_SLOT)
