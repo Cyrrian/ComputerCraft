@@ -411,7 +411,7 @@ args = { ... }
 intLength = tonumber(args[1])
 intLength = intLength or LIGHT_GAP
 if intLength % LIGHT_GAP ~= 0 then
-	intLength = intLength - (intLength % LIGHT_GAP)
+	intLength = intLength - (intLength % (LIGHT_GAP * 2))
 end
 
 intStep = 1
