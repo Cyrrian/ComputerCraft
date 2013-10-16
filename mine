@@ -75,9 +75,9 @@ function Unload()
 	intPosZ = pos.z
 	
 	Face_Back()
-	Move_Up()
-	for i = 1, pos.z+1 do
-		Move_Forward_ND()
+
+	for i = 1, pos.z do
+		Move_Forward()
 	end
 	
 	for i = FIRST_OPEN_SLOT, 16 do
@@ -95,9 +95,8 @@ function Unload()
 
 	Face_Front()
 	for i = 1, intPosZ do
-		Move_Forward_ND()
+		Move_Forward()
 	end
-	Move_Down()
 end
 
 -----------------------------
@@ -142,9 +141,22 @@ function Light_Back()
 	Face_Back()
 	turtle.select(LIGHT_SLOT)
 	turtle.place()
-	Face_Left()
+	Face_Forward()
 end
 
+function Light_Up()
+	Check_Inv(LIGHT_SLOT)
+
+	turtle.select(LIGHT_SLOT)
+	turtle.placeUp()
+end
+
+function Light_Back()
+	Check_Inv(LIGHT_SLOT)
+
+	turtle.select(LIGHT_SLOT)
+	turtle.placeDown()
+end
 -----------------------------
 --Move Functions
 -----------------------------
@@ -203,14 +215,7 @@ function Move_Up()
 	pos.y = pos.y + 1
 end
 
-function Move_Forward_ND()
-	Fuel()
 
-	turtle.forward()
-	
-	pos.x = pos.x + dir.x
-	pos.z = pos.z + dir.z
-end
 -----------------------------
 --Turn Functions
 -----------------------------
@@ -317,11 +322,6 @@ mtxCommands[0][-1] = function()
 	turtle.select(BLOCK_SLOT)
 	if turtle.detect() == true or turtle.detectUp() == true or (not turtle.compareDown() and turtle.digDown()) then
 			
-		if pos.z % LIGHT_GAP == 0 then 
-			print("Current Depth: " .. pos.z)
-			Light_Back()
-		end
-	
 		Block_Down()
 		Dig_Up()
 		Move_Forward()
@@ -344,6 +344,12 @@ mtxCommands[1][-1] = function()
 	Block_Down()
 	Face_Right()
 	Block_Forward()
+	
+	if pos.z % LIGHT_GAP == 0 and pos.z % (LIGHT_GAP * 2) ~= 0 then 
+		print("Current Depth: " .. pos.z)
+		Light_Up()
+	end
+	
 	Face_Left()
 	Move_Forward()
 end
@@ -372,6 +378,12 @@ mtxCommands[-1][1] = function()
 	Block_Up()
 	Face_Left()
 	Block_Forward()
+	
+	if pos.z % (LIGHT_GAP * 2) == 0 then 
+		print("Current Depth: " .. pos.z)
+		Light_Down()
+	end
+	
 	Face_Right()
 	Move_Forward()
 end
