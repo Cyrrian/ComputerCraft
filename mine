@@ -86,7 +86,7 @@ function Unload()
 			if turtle.compareTo(BLOCK_SLOT) and boolFoundBlocks == false then
 				boolFoundBlocks = true
 			else
-				turtle.dropDown()
+				turtle.drop()
 			end
         end
 	end
